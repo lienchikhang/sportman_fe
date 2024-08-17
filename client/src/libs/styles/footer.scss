@@ -1,6 +1,10 @@
 footer {
-    @apply w-[92%] mx-auto pt-16;
     border-top: 1px solid #e4e5e7;
+    background-color: #373663;
+
+    .footer__wrapper {
+        @apply w-[92%] mx-auto pt-16;
+    }
 
     .footer__responsive {
         @apply block sm:hidden
@@ -8,14 +12,57 @@ footer {
 
     .footer__top {
 
-        @apply hidden sm:grid sm:grid-cols-9 lg:grid-cols-10 pb-4 gap-10;
-        border-bottom: 1px solid #e4e5e7;
+        @apply hidden lg:flex flex-col pb-4 gap-10; //response:: sm:grid sm:grid-cols-9 lg:grid-cols-10   
+        border-bottom: 1px solid #E6E5FF;
+
+
+        h1 {
+            @apply text-4xl font-semibold text-white
+        }
+
+        .footer__flex {
+            @apply grid grid-cols-12 gap-28 pt-12 pb-36;
+
+            .footer__top-left {
+                @apply col-span-4;
+
+                .email {
+                    @apply px-1 py-2 bg-transparent flex items-baseline border-b-2 mb-4;
+                    border-color: #E6E5FF;
+
+                    input {
+                        @apply bg-transparent flex-1 text-base outline-none;
+                        color: #E6E5FF;
+                    }
+
+                    button {
+                        @apply px-4 py-2 rounded-full font-medium;
+                        background-color: #635EF7;
+                        color: #E6E5FF;
+                    }
+
+                }
+
+                .agree {
+                    @apply text-sm;
+                    color: #E6E5FF;
+                }
+            }
+
+            .footer__top-right {
+                @apply col-span-8 grid grid-cols-8;
+            }
+        }
+
+
+
 
         .footer__item {
             @apply sm:col-span-3 lg:col-span-2;
 
             .item__heading {
-                @apply text-base font-semibold mb-4;
+                @apply text-sm font-semibold mb-4;
+                color: #E6E5FF;
             }
 
             .item__list {
@@ -23,7 +70,8 @@ footer {
                     @apply mb-3;
 
                     p {
-                        color: #74767d;
+                        @apply text-white font-medium text-sm;
+                        color: white;
                     }
                 }
             }
@@ -38,11 +86,12 @@ footer {
 
             svg {
                 @apply mr-4;
+                color: #E6E5FF;
             }
 
             p {
                 @apply text-sm;
-                color: #74767d;
+                color: #E6E5FF;
             }
         }
 
@@ -52,7 +101,7 @@ footer {
 
                 li {
                     svg {
-                        @apply mr-6;
+                        @apply mr-6 text-white;
                     }
                 }
             }
