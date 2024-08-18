@@ -1,0 +1,8 @@
+.logo {
+    @apply p-4 cursor-pointer;
+
+    h1 {
+        @apply text-xl font-bold uppercase;
+        color: #635EF7;
+    }
+}

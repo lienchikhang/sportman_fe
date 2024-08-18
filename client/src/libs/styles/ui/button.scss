@@ -1,0 +1,66 @@
+button.button {
+    @apply px-8 py-2 text-base font-medium border-2 rounded-full transition-all cursor-pointer;
+
+
+    // .MuiCircularProgress-root.MuiCircularProgress-indeterminate.MuiCircularProgress-colorPrimary.css-18lrjg1-MuiCircularProgress-root {
+    //     @apply w-[30px] h-[30px];
+    // }
+
+
+    &.primary {
+        border-color: #635EF7;
+        background-color: #635EF7;
+        @apply text-white;
+
+        svg {
+            // @apply w-[20px] h-[20px];
+            @apply text-white;
+        }
+
+    }
+
+
+    &.secondary {
+        border-color: #635EF7;
+        color: #635EF7;
+        @apply bg-transparent;
+
+        svg {
+            // @apply w-[20px] h-[20px];
+            color: #635EF7;
+
+        }
+    }
+
+    &:hover {
+        &.primary {
+            border-color: #928efc;
+            background-color: #928efc;
+        }
+
+        &.secondary {
+            background-color: #635EF7;
+            @apply text-white;
+
+
+        }
+    }
+
+
+    &.disabled {
+        border-color: #e6e5ff;
+        background-color: #e6e5ff;
+        @apply text-white cursor-not-allowed;
+
+        &:hover {
+            border-color: #e6e5ff;
+            background-color: #e6e5ff;
+        }
+
+        svg {
+            // @apply w-[20px] h-[20px];
+            @apply text-white;
+        }
+    }
+
+}
