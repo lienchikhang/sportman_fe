@@ -5,12 +5,13 @@ import React from 'react';
 interface Props {
     url?: string,
     name: string,
+    variant?: string,
 }
 
-const AvatarCustom: React.FC<Props> = ({ url, name }) => {
+const AvatarCustom: React.FC<Props> = ({ url, name, variant = "rounded" }) => {
     return (
-        url ? <Avatar src={url} sx={{ width: 46, height: 46 }}></Avatar>
-            : <Avatar sx={{ width: 46, height: 46 }}>{name[0]}</Avatar>
+        url ? <Avatar variant={variant == "rounded" ? "rounded" : "square"} src={url} sx={{ width: 46, height: 46 }} ></Avatar>
+            : <Avatar variant={variant == "rounded" ? "rounded" : "square"} sx={{ width: 46, height: 46, borderRadius: "11px" }}>{name[0]}</Avatar>
     )
 }
 

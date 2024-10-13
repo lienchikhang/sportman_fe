@@ -1,6 +1,6 @@
 import React from 'react';
 import "../libs/styles/header.scss";
-import { Balance, Button, Cart, Logo, User } from './ui';
+import { Balance, Button, Cart, HeaderSub, Logo, User } from './ui';
 import SearchBar from './SearchBar';
 
 const Header = () => {
@@ -13,6 +13,7 @@ const Header = () => {
                     </div>
                     <div className="header__search">
                         <SearchBar />
+                        <HeaderSub />
                     </div>
                     <div className="header__nav">
                         <Cart />
@@ -20,7 +21,6 @@ const Header = () => {
                         <User />
                     </div>
                 </section>
-                <div className="header__bottom"></div>
             </div>
         </header>
     )

@@ -3,11 +3,13 @@ import Button from "./Button";
 import Cart from "./Cart";
 import User from "./User";
 import Balance from "./Balance";
+import HeaderSub from "./HeaderSub";
 
 export {
     Logo,
     Button,
     Cart,
     Balance,
-    User
+    User,
+    HeaderSub
 }

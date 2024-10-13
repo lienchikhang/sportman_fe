@@ -9,7 +9,16 @@ const actionsNotLoggedIn = [
     "SignIn",
 ]
 
+const headerSub = [
+    "Popular Products",
+    "Favorite Clubs",
+    "Top Reviews",
+    "Best Deals",
+    "Recently Viewed",
+]
+
 export {
     actions,
     actionsNotLoggedIn,
+    headerSub
 }

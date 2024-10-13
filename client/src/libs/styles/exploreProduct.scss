@@ -1,0 +1,79 @@
+.explore__wrapper {
+    @apply w-[92%] mx-auto py-28;
+
+    h1 {
+        @apply text-7xl w-[500px] leading-[80px] font-semibold text-wrap mb-8;
+    }
+
+    .explore__part {
+        @apply grid grid-cols-12 gap-10;
+
+        .explore__left {
+            @apply col-span-6 flex flex-col gap-8;
+
+            .left__item {
+                @apply w-full h-[200px] rounded-2xl bg-red-300;
+
+                h2 {
+                    @apply font-semibold text-white;
+                }
+
+
+                &:first-child {
+
+                    background: linear-gradient(90deg, rgba(99, 94, 247, 1) 0%, rgba(255, 255, 255, 1) 100%);
+                    box-shadow: rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px;
+
+                    .wrapper {
+                        @apply w-full h-full overflow-hidden flex flex-col gap-3 justify-center items-center relative;
+
+                        img {
+                            @apply h-full object-cover absolute;
+
+                            &:first-child {
+                                @apply bottom-0 left-7;
+                            }
+
+                            &:nth-child(2) {
+                                @apply bottom-0 right-4;
+                            }
+                        }
+                    }
+                }
+
+                &:nth-child(2) {
+
+                    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(43, 97, 219, 1) 100%);
+                    box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+
+                    .wrapper {
+                        @apply p-6 w-full h-full overflow-hidden flex flex-col gap-3 justify-center items-start relative;
+
+                        img {
+                            @apply h-full object-cover absolute bottom-0 right-16;
+                        }
+                    }
+                }
+            }
+
+            .left__bottom {
+                @apply w-full flex items-center gap-5;
+
+                .bottom__wrapper {
+                    @apply p-7 h-full w-1/2 bg-red-300 rounded-2xl;
+                }
+            }
+        }
+
+
+
+
+        .explore__right {
+            @apply col-span-6;
+
+            .right__new {
+                @apply flex items-center gap-5;
+            }
+        }
+    }
+}
