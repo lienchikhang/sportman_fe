@@ -3,6 +3,8 @@ import React from 'react';
 import '../libs/styles/exploreProduct.scss';
 import { Button } from './ui';
 import NewSection from './NewSection';
+import CallMadeIcon from '@mui/icons-material/CallMade';
+
 
 const ExploreProduct = () => {
     return (
@@ -35,23 +37,28 @@ const ExploreProduct = () => {
                     </div>
                     <div className='left__bottom'>
                         <div className='bottom__wrapper'>
-                            <h2> <span>90+</span> products</h2>
+                            <h2> <span>90</span> <span>+</span> products</h2>
                         </div>
                         <div className='bottom__wrapper'>
-                            <Button
-                                primary={false}
-                                callback={() => console.log('explore')}
-                                text='Explore All'
-                            />
+                            <h2>
+                                <span className='active'>15</span>
+                                <span className='unactive'>km</span>
+                            </h2>
+                            <p className='sub'>FREE SHIPPING</p>
                         </div>
                     </div>
                 </div>
                 <div className='explore__right'>
-                    <div className='right__new'>
-                        <NewSection />
-                    </div>
+                    <NewSection />
                     <div className='right__bottom'>
-
+                        <div className='info'>
+                            <h3>Find the best jersey!</h3>
+                            <p>Shop now</p>
+                        </div>
+                        <img src="/explore6.png" alt="" />
+                        <div className="product__nav">
+                            <CallMadeIcon />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -4,7 +4,7 @@ import CallMadeIcon from '@mui/icons-material/CallMade';
 import { Button } from './ui';
 import { IProduct } from '@/libs/interfaces/product.interface';
 import '../libs/styles/ui/product.scss';
-import { Skeleton } from '@mui/material';
+import { Box, Skeleton } from '@mui/material';
 
 interface Props {
     product: IProduct | null,
@@ -22,16 +22,23 @@ const Product: React.FC<Props> = ({ product }) => {
                 <CallMadeIcon />
             </div>
         </div>
-        <div className="product__image">
-            <Skeleton animation="wave" />
-        </div>
+        {/* <div className="product__image">
+            <Skeleton animation="wave" height={320} />
+        </div> */}
+        <Skeleton animation="wave" height={320} />
         <div className="product__info">
-            <Skeleton animation="wave" />
+            <Box>
+                <Skeleton animation="wave" />
+                <Skeleton animation="wave" />
+            </Box>
             <div className='product__price'>
-                <span><Skeleton animation="wave" /></span>
+                <span>
+                    <Skeleton animation="wave" width={100} />
+                </span>
                 <Button
-                    callback={() => console.log('product')}
+                    callback={() => { }}
                     primary
+                    disable
                     text={"+"}
                 />
             </div>

@@ -12,7 +12,7 @@
             @apply col-span-6 flex flex-col gap-8;
 
             .left__item {
-                @apply w-full h-[200px] rounded-2xl bg-red-300;
+                @apply w-full h-[230px] rounded-2xl bg-red-300;
 
                 h2 {
                     @apply font-semibold text-white;
@@ -36,7 +36,13 @@
 
                             &:nth-child(2) {
                                 @apply bottom-0 right-4;
+
                             }
+                        }
+
+                        h2 {
+                            @apply text-xl font-semibold text-black;
+                            // color: #fa37af;
                         }
                     }
                 }
@@ -52,6 +58,11 @@
                         img {
                             @apply h-full object-cover absolute bottom-0 right-16;
                         }
+
+                        h2 {
+                            @apply text-xl font-semibold text-black;
+                            // color: #fa37af;
+                        }
                     }
                 }
             }
@@ -61,6 +72,55 @@
 
                 .bottom__wrapper {
                     @apply p-7 h-full w-1/2 bg-red-300 rounded-2xl;
+
+                    &:first-child {
+                        background: linear-gradient(90deg, rgba(99, 94, 247, 1) 0%, rgba(255, 255, 255, 1) 100%);
+                        box-shadow: rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px;
+                    }
+
+                    &:nth-child(2) {
+
+                        background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(43, 97, 219, 1) 100%);
+                        box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
+
+                        img {
+                            @apply object-cover w-full h-[200px];
+                        }
+                    }
+
+                    h2 {
+                        @apply text-4xl text-wrap font-medium text-white;
+
+                        span {
+                            @apply text-8xl font-semibold text-white;
+
+                            &:nth-child(2) {
+                                color: #fa37af;
+                            }
+
+                            &.active {
+                                color: #fa37af;
+                            }
+
+                            &.unactive {
+                                color: #ffffff;
+                            }
+                        }
+                    }
+
+                    p.sub {
+                        @apply text-white font-medium text-right;
+
+                        span {
+                            color: #fa37af;
+                            @apply font-bold;
+                        }
+                    }
+
+                    h3 {
+                        @apply mb-3 font-medium;
+
+                    }
                 }
             }
         }
@@ -72,7 +132,54 @@
             @apply col-span-6;
 
             .right__new {
-                @apply flex items-center gap-5;
+                @apply flex items-center gap-5 mb-6;
+            }
+
+            .error__wrapper {
+                @apply w-full h-full flex justify-center items-center rounded-2xl;
+                background-color: #f8f8ff;
+            }
+
+            .error {
+                @apply flex items-center flex-col gap-5;
+
+                .error__heading {
+                    @apply text-2xl text-center font-semibold mb-3;
+                }
+
+                button {
+                    @apply w-[200px]
+                }
+            }
+
+            .right__bottom {
+                @apply relative flex items-center p-12 rounded-2xl;
+                background-color: #d9e4fc;
+
+                .info {
+
+                    // @apply
+                    h3 {
+                        @apply font-semibold text-xl;
+                    }
+                }
+
+                img {
+                    @apply absolute left-[240px] bottom-0 object-cover w-[280px];
+                }
+
+                .product__nav {
+                    @apply absolute top-8 right-8 rounded-2xl p-[12px] bg-white transition-all;
+
+                    svg {
+                        @apply text-2xl font-bold;
+                    }
+
+                    &:hover {
+                        @apply scale-110;
+                        box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+                    }
+                }
             }
         }
     }
