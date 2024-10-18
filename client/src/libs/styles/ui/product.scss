@@ -1,5 +1,5 @@
 .product__wrapper {
-    @apply w-1/2 flex flex-col justify-center gap-3 rounded-3xl p-6;
+    @apply w-1/2 flex flex-col justify-center gap-3 rounded-3xl p-6 min-w-[304.75px];
     background-color: #f8f8ff;
 
     .product__top {

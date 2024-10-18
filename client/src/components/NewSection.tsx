@@ -18,7 +18,8 @@ const NewSection = () => {
                 if (res?.status != 200) { setError(true); return; }
                 setProducts(res?.data?.content?.products);
                 setLoading(false);
-            }).catch((err) => { setError(true); setLoading(false) });
+            })
+            .catch((err) => { setError(true); setLoading(false) });
 
     }, []);
 
