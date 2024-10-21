@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 
 interface Props {
-    url?: string,
+    url?: string | null,
     name: string,
     variant?: string,
 }

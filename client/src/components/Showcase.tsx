@@ -90,8 +90,8 @@ const Showcase = () => {
             >
                 {
                     products && products.map((pro, idx) => {
-                        return <SwiperSlide>
-                            <Product product={pro} key={idx} />
+                        return <SwiperSlide key={idx}>
+                            <Product product={pro} />
                         </SwiperSlide>
                     })
                 }

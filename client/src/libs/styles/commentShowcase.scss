@@ -1,0 +1,12 @@
+.commentShowcase__background {
+
+    background-color: #9b99fb;
+
+    .commentShowcase__wrapper {
+        @apply w-[92%] mx-auto py-24;
+
+        .commentShowcase__title {
+            @apply text-5xl font-semibold mb-16 text-center text-white;
+        }
+    }
+}

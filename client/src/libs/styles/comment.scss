@@ -1,0 +1,41 @@
+.comment__wrapper {
+    @apply p-6 w-[300px] rounded-3xl bg-white;
+
+    .comment__date {
+        @apply text-zinc-300 font-medium text-sm mb-8;
+    }
+
+    .comment__starts {
+        @apply mb-4;
+    }
+
+    .comment__content {
+        @apply text-base min-h-[100px] max-h-[100px];
+    }
+
+    .comment__quote {
+        @apply mb-16;
+
+        svg {
+            @apply float-right w-10 h-10;
+        }
+    }
+
+    .user {
+        @apply flex gap-5 items-center;
+
+        .user__info {
+            @apply flex flex-col;
+
+
+            .user__name {
+                @apply text-base font-medium mb-1;
+            }
+
+            .user__username {
+                @apply text-xs text-zinc-400;
+            }
+        }
+    }
+
+}

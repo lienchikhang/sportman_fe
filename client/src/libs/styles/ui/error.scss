@@ -1,0 +1,11 @@
+.error {
+    @apply flex items-center flex-col gap-5;
+
+    .error__heading {
+        @apply text-2xl text-center font-semibold mb-3;
+    }
+
+    button {
+        @apply w-[200px]
+    }
+}

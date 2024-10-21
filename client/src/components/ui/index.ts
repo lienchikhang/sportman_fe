@@ -4,6 +4,7 @@ import Cart from "./Cart";
 import User from "./User";
 import Balance from "./Balance";
 import HeaderSub from "./HeaderSub";
+import Error from "./Error";
 
 export {
     Logo,
@@ -11,5 +12,6 @@ export {
     Cart,
     Balance,
     User,
-    HeaderSub
+    HeaderSub,
+    Error,
 }
