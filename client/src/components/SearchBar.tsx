@@ -75,6 +75,7 @@ const SearchBar = () => {
     const debouncedHandleInputChange = useCallback(debounce(handleInput, 1000), [handleInput]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
         setLoading(true);
         setRecOpen(true);
         // setInput(e.currentTarget.value);
@@ -90,6 +91,14 @@ const SearchBar = () => {
             })
             .catch(err => { setHasError(true); setLoading(false) })
     }
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            setRecOpen(false);
+            e.currentTarget.blur();
+            router.push(`/products?page=1&pageSize=25&name=${e.currentTarget.value}`);
+        }
+    };
 
     if (hasError) {
         return <div className='search__wrapper'>
@@ -124,6 +133,7 @@ const SearchBar = () => {
                         type="text"
                         placeholder="I'm shopping for..."
                         onChange={handleInputChange}
+                        onKeyDown={handleKeyDown}
                     />
                     <button><SearchIcon /></button>
                 </div>
