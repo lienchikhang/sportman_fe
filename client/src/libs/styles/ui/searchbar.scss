@@ -16,6 +16,7 @@
     }
 
     .recommend__wrapper {
+
         &.active {
             @apply block;
         }
@@ -26,8 +27,12 @@
     }
 
     .recommend {
-        @apply absolute w-full top-[120%] rounded-md left-0 max-h-[200px] overflow-y-scroll;
+        @apply absolute w-full top-[120%] rounded-md left-0 max-h-[200px] overflow-y-scroll z-50;
         background-color: #E6E5FF;
+
+        p.recommend__total {
+            @apply px-4 py-2 font-semibold text-zinc-400;
+        }
 
         li {
             @apply flex items-center justify-between px-4 py-1 cursor-pointer transition-all;
@@ -40,7 +45,7 @@
     }
 
     .recommend-loading {
-        @apply absolute top-[120%] left-0 rounded-md w-full h-[200px] flex justify-center items-center;
+        @apply absolute top-[120%] left-0 rounded-md w-full h-[200px] flex justify-center items-center z-50;
         background-color: #E6E5FF;
 
         svg {
@@ -51,5 +56,9 @@
             @apply font-medium text-xl;
             color: #635EF7;
         }
+    }
+
+    .recommend__show {
+        @apply font-semibold text-zinc-400;
     }
 }

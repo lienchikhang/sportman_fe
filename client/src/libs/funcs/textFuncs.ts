@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 const convertCommentText = (text: string): string => {
     if (text.length <= 100) return text;
     return text.slice(0, 100) + "...";

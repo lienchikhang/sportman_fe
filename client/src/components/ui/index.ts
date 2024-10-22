@@ -5,6 +5,7 @@ import User from "./User";
 import Balance from "./Balance";
 import HeaderSub from "./HeaderSub";
 import Error from "./Error";
+import HightLightWord from "./HightLightWord";
 
 export {
     Logo,
@@ -14,4 +15,5 @@ export {
     User,
     HeaderSub,
     Error,
+    HightLightWord,
 }
