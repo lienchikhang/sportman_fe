@@ -1,0 +1,11 @@
+.productList__wrapper {
+    @apply mt-8 grid grid-cols-12 gap-10;
+
+
+}
+
+.productList__error {
+    @apply mt-8 flex justify-center items-center h-[650px] rounded-2xl;
+    background-color: #f8f8ff;
+
+}

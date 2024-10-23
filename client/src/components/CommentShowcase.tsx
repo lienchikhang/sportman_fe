@@ -32,9 +32,11 @@ const CommentShowcase = () => {
     }, []);
 
     if (hasError) {
-        return <div className='commentShowcase__wrapper'>
-            <h1 className='commentShowcase__title'>WHAT OUR REVIEWS SAY</h1>
-            <Error />
+        return <div className="commentShowcase__background">
+            <div className='commentShowcase__wrapper text-white'>
+                <h1 className='commentShowcase__title'>WHAT OUR REVIEWS SAY</h1>
+                <Error />
+            </div>
         </div>
     }
 

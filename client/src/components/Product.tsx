@@ -8,11 +8,12 @@ import { Box, Skeleton } from '@mui/material';
 
 interface Props {
     product: IProduct | null,
+    style?: string,
 }
 
-const Product: React.FC<Props> = ({ product }) => {
+const Product: React.FC<Props> = ({ product, style }) => {
 
-    if (!product) return <div className='product__wrapper'>
+    if (!product) return <div className={`product__wrapper ${style}`}>
         <div className="product__top">
             <div className="color__wrapper">
                 <div className='color__item' style={{ backgroundColor: '#c3c3c3', borderColor: '#c3c3c3' }}></div>

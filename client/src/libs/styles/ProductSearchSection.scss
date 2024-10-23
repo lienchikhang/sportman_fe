@@ -1,0 +1,32 @@
+.productSearch__wrapper {
+    @apply w-[92%] mx-auto pt-6 pb-12;
+
+    .productSearch__heading {
+        @apply py-4 flex gap-3 items-center;
+
+        h1 {
+            @apply text-2xl relative;
+
+        }
+
+        .nameFilter {
+            @apply cursor-pointer;
+            color: #635EF7;
+
+            svg {
+                @apply text-3xl;
+            }
+        }
+
+
+    }
+
+    .productSearch__filters {
+        @apply flex items-center gap-5;
+    }
+
+    .strong {
+        @apply font-bold px-3 py-1 rounded-full text-white;
+        background-color: #635EF7;
+    }
+}

@@ -1,8 +1,8 @@
 'use client';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import '../libs/styles/ui/searchbar.scss';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { CircularProgress } from '@mui/material';
 import { debounce } from '@/libs/funcs/inputFuncs';
 import { motion } from 'framer-motion';
@@ -26,16 +26,23 @@ const SearchBar = () => {
     const [totalElements, setTotalElements] = useState(0);
     const [curValue, setValue] = useState('');
     const router = useRouter();
+    const search = useSearchParams();
+    const [inputValue, setInputValue] = useState('');
     // const path = usePathname();
+
+    useEffect(() => {
+        if (!search.get("name")) {
+            setInputValue('');
+        }
+    }, [search.get("name")]);
 
     console.log({ items });
 
     const handleClickItem = (endpoint: string) => {
-        // router.push(endpoint);
-        console.log({ endpoint, })
         setRecOpen(false);
 
         setTimeout(() => {
+            setInputValue('')
             router.push(`/products?page=1&pageSize=25&name=${endpoint}`);
         }, 300);
     }
@@ -49,11 +56,7 @@ const SearchBar = () => {
             }, 1000)
             return;
         }
-
-        console.log("User input:", value);
         setValue(value);
-
-
         setTimeout(() => {
 
             http.get(`products/get-list-name?name=${value}&page=${curPage}`)
@@ -75,7 +78,7 @@ const SearchBar = () => {
     const debouncedHandleInputChange = useCallback(debounce(handleInput, 1000), [handleInput]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-
+        setInputValue(e.currentTarget.value);
         setLoading(true);
         setRecOpen(true);
         // setInput(e.currentTarget.value);
@@ -106,6 +109,7 @@ const SearchBar = () => {
                 <div className='input'>
                     <input
                         type="text"
+                        value={inputValue}
                         placeholder="I'm shopping for..."
                         onChange={handleInputChange}
                     />
@@ -132,6 +136,7 @@ const SearchBar = () => {
                     <input
                         type="text"
                         placeholder="I'm shopping for..."
+                        value={inputValue}
                         onChange={handleInputChange}
                         onKeyDown={handleKeyDown}
                     />

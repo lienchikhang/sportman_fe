@@ -33,7 +33,7 @@ const NewSection = () => {
     }
 
     if (hasError) {
-        return <div className="error__wrapper">
+        return <div className="error__wrapper max-h-[554px] mb-4">
             <div className='error'>
                 <h2 className='error__heading'>Something is wrong! Please try again.</h2>
                 <Button
