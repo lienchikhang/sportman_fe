@@ -7,7 +7,11 @@ import '../libs/styles/productList.scss';
 import { Error } from './ui';
 import { Pagination } from '@mui/material';
 
-const ProductList = () => {
+interface Props {
+    notify: (mess: string, isSuccess: boolean) => void,
+}
+
+const ProductList: React.FC<Props> = ({ notify }) => {
 
     const query = useSearchParams();
     const params = new URLSearchParams(query as any);
@@ -40,14 +44,14 @@ const ProductList = () => {
 
     if (loading) {
         return <div className='productList__wrapper'>
-            <Product product={null} style='col-span-4 w-full' />
-            <Product product={null} style='col-span-4 w-full' />
-            <Product product={null} style='col-span-4 w-full' />
-            <Product product={null} style='col-span-4 w-full' />
-            <Product product={null} style='col-span-4 w-full' />
-            <Product product={null} style='col-span-4 w-full' />
-            <Product product={null} style='col-span-4 w-full' />
-            <Product product={null} style='col-span-4 w-full' />
+            <Product product={null} style='col-span-4 w-full' notify={() => { }} />
+            <Product product={null} style='col-span-4 w-full' notify={() => { }} />
+            <Product product={null} style='col-span-4 w-full' notify={() => { }} />
+            <Product product={null} style='col-span-4 w-full' notify={() => { }} />
+            <Product product={null} style='col-span-4 w-full' notify={() => { }} />
+            <Product product={null} style='col-span-4 w-full' notify={() => { }} />
+            <Product product={null} style='col-span-4 w-full' notify={() => { }} />
+            <Product product={null} style='col-span-4 w-full' notify={() => { }} />
         </div>
     }
 
@@ -62,7 +66,7 @@ const ProductList = () => {
             <div className='productList__wrapper'>
                 {
                     !loading && products.length ? products.map((product, idx) => {
-                        return <Product product={product} style='col-span-4 w-full' key={idx} />
+                        return <Product product={product} style='col-span-4 w-full' key={idx} notify={notify} />
                     }) : <div>Oop! There's no product that match your find</div>
                 }
             </div>

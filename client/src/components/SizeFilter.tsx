@@ -28,7 +28,7 @@ const SizeFilter = () => {
 
     useEffect(() => {
         setLoading(true);
-        http.get("/sizes")
+        http.get("/sizes?pageSize=12")
             .then((res) => {
                 if (res?.status != 200) { setError(true); return; }
                 setSizes(res?.data?.content?.sizes);
@@ -96,6 +96,7 @@ const SizeFilter = () => {
                     text='Cancel'
                     primary={false}
                     callback={handleCancel}
+                    showNotice={() => { }}
                     style='!rounded-md'
                     disable
                 />
@@ -103,6 +104,7 @@ const SizeFilter = () => {
                     text='Apply'
                     primary
                     callback={handleConfirm}
+                    showNotice={() => { }}
                     style='!rounded-md'
                     disable
                 />
@@ -126,12 +128,14 @@ const SizeFilter = () => {
                 <Button
                     text='Cancel'
                     primary={false}
+                    showNotice={() => { }}
                     callback={handleCancel}
                     style='!rounded-md'
                 />
                 <Button
                     text='Apply'
                     primary
+                    showNotice={() => { }}
                     callback={handleConfirm}
                     style='!rounded-md'
                 />

@@ -34,7 +34,7 @@ const Showcase = () => {
     }, []);
 
     const handleExplore = () => {
-        route.push("/products?page=1&pageSize=25")
+        route.push("/products?page=1&pageSize=25&sort=asc")
     }
 
     if (loading) {
@@ -44,10 +44,10 @@ const Showcase = () => {
                 <p onClick={handleExplore}>Explore more</p>
             </div>
             <div className="showcase__products">
-                <Product product={null} />
-                <Product product={null} />
-                <Product product={null} />
-                <Product product={null} />
+                <Product product={null} notify={() => { }} />
+                <Product product={null} notify={() => { }} />
+                <Product product={null} notify={() => { }} />
+                <Product product={null} notify={() => { }} />
             </div>
         </div>
     }
@@ -64,6 +64,7 @@ const Showcase = () => {
                         <h2 className='error__heading'>Something is wrong! Please try again.</h2>
                         <Button
                             callback={() => window.location.reload()}
+                            showNotice={() => { }}
                             primary
                             text='Reload'
                         />
@@ -91,7 +92,7 @@ const Showcase = () => {
                 {
                     products && products.map((pro, idx) => {
                         return <SwiperSlide key={idx}>
-                            <Product product={pro} />
+                            <Product product={pro} notify={() => { }} />
                         </SwiperSlide>
                     })
                 }

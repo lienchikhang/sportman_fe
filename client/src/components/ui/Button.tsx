@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import "../../libs/styles/ui/button.scss";
 import { CircularProgress } from '@mui/material';
+import http from '@/libs/configs/http';
 
 interface Props {
     text: string,
@@ -9,6 +10,8 @@ interface Props {
     hasIntrospect?: boolean,
     primary: boolean,
     disable?: boolean,
+    onlyLoading?: boolean,
+    showNotice: (mess: string, isSuccess: boolean) => void,
     callback: () => void;
 }
 
@@ -18,6 +21,8 @@ const Button: React.FC<Props> = ({
     hasIntrospect = false,
     primary = true,
     disable = false,
+    onlyLoading = false,
+    showNotice,
     callback
 }) => {
 
@@ -31,10 +36,22 @@ const Button: React.FC<Props> = ({
 
         if (hasIntrospect) {
             //check
+            http.introspect(`auth/introspect-token`)
+                .then((res) => {
+                    callback();
+                })
+                .catch((err) => {
+                    if (err.response.status == 400) {
+                        setTimeout(() => {
+                            showNotice('Please login!', false);
+                            setLoading(false);
+                        }, 1800)
+                    }
+                });
         }
 
         setTimeout(() => {
-            callback();
+            // callback();
             setLoading(false);
         }, 1800)
     }
@@ -50,9 +67,8 @@ const Button: React.FC<Props> = ({
             disabled={disable}
             onClick={handleClick}
         >
-            {isLoading ? <div className='flex items-center gap-1'>
-                <CircularProgress style={{ width: '19px', height: '19px' }} />
-                <span>Loading</span>
+            {isLoading ? <div className={`flex items-center ${onlyLoading ? 'justify-center' : 'gap-1'}`}>
+                {onlyLoading ? <CircularProgress style={{ width: '19px', height: '19px' }} /> : <span>Loading...</span>}
             </div> : text}
         </button>
     )

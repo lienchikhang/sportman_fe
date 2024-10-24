@@ -9,9 +9,10 @@ import { Box, Skeleton } from '@mui/material';
 interface Props {
     product: IProduct | null,
     style?: string,
+    notify: (mess: string, isSuccess: boolean) => void,
 }
 
-const Product: React.FC<Props> = ({ product, style }) => {
+const Product: React.FC<Props> = ({ product, style, notify }) => {
 
     if (!product) return <div className={`product__wrapper ${style}`}>
         <div className="product__top">
@@ -39,6 +40,7 @@ const Product: React.FC<Props> = ({ product, style }) => {
                 <Button
                     callback={() => { }}
                     primary
+                    showNotice={notify}
                     disable
                     text={"+"}
                 />
@@ -72,6 +74,9 @@ const Product: React.FC<Props> = ({ product, style }) => {
                         callback={() => console.log('product')}
                         primary
                         text={"+"}
+                        showNotice={notify}
+                        hasIntrospect
+                        onlyLoading
                     />
                 </div>
             </div>
