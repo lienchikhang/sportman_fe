@@ -1,5 +1,7 @@
 .logo {
-    @apply p-4 cursor-pointer;
+    @apply p-4 cursor-pointer rounded-full;
+    background-color: #e6e5ff;
+
 
     h1 {
         @apply text-xl font-bold uppercase;

@@ -1,6 +1,6 @@
 'use client';
 import http from '@/libs/configs/http';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import Product from './Product';
 import '../libs/styles/productList.scss';
@@ -11,35 +11,43 @@ const ProductList = () => {
 
     const query = useSearchParams();
     const params = new URLSearchParams(query as any);
+    const router = useRouter();
     const pathname = usePathname();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [totalPage, setTotalPage] = useState(0);
+    const [curPage, setCurPage] = useState(1);
 
     useEffect(() => {
         setLoading(true);
         http.get(`${pathname}?${params.toString()}`)
             .then((res) => {
-                console.log({ res });
                 if (res?.status != 200) { setError(true); return; }
                 setLoading(false);
                 setProducts(res?.data?.content?.products);
+                setCurPage(res?.data?.content?.currentPage);
+                setTotalPage(res?.data?.content?.totalPage);
             })
             .catch((err) => { setError(true); setLoading(false); })
     }, [params.toString()]);
 
-    console.log({ params: params.toString() })
+    const handleChangePage = (e: React.ChangeEvent<unknown>, value: number) => {
+        setCurPage(value);
+        params.set('page', value.toString());
+        router.push(`${pathname}?${params}`)
+    }
 
     if (loading) {
         return <div className='productList__wrapper'>
-            <Product product={null} style='col-span-3 w-full' />
-            <Product product={null} style='col-span-3 w-full' />
-            <Product product={null} style='col-span-3 w-full' />
-            <Product product={null} style='col-span-3 w-full' />
-            <Product product={null} style='col-span-3 w-full' />
-            <Product product={null} style='col-span-3 w-full' />
-            <Product product={null} style='col-span-3 w-full' />
-            <Product product={null} style='col-span-3 w-full' />
+            <Product product={null} style='col-span-4 w-full' />
+            <Product product={null} style='col-span-4 w-full' />
+            <Product product={null} style='col-span-4 w-full' />
+            <Product product={null} style='col-span-4 w-full' />
+            <Product product={null} style='col-span-4 w-full' />
+            <Product product={null} style='col-span-4 w-full' />
+            <Product product={null} style='col-span-4 w-full' />
+            <Product product={null} style='col-span-4 w-full' />
         </div>
     }
 
@@ -53,12 +61,14 @@ const ProductList = () => {
         <div>
             <div className='productList__wrapper'>
                 {
-                    products.map((product, idx) => {
-                        return <Product product={product} style='col-span-3 w-full' key={idx} />
-                    })
+                    !loading && products.length ? products.map((product, idx) => {
+                        return <Product product={product} style='col-span-4 w-full' key={idx} />
+                    }) : <div>Oop! There's no product that match your find</div>
                 }
             </div>
-            <Pagination count={10} color="secondary" />
+            {
+                products.length != 0 && <Pagination count={totalPage} color="secondary" page={curPage} onChange={handleChangePage} />
+            }
         </div>
     )
 }

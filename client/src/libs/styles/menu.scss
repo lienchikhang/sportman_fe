@@ -1,0 +1,44 @@
+.menu__wrapper {
+    @apply w-full p-4 rounded-xl border-2;
+
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation1.MuiAccordion-root.MuiAccordion-rounded.MuiAccordion-gutters.css-1086bdv-MuiPaper-root-MuiAccordion-root {
+    border-radius: 8px !important;
+
+    @apply border-none;
+    box-shadow: none;
+
+    &::before {
+        @apply hidden;
+    }
+}
+
+.MuiButtonBase-root.MuiAccordionSummary-root.MuiAccordionSummary-gutters.false.css-1f773le-MuiButtonBase-root-MuiAccordionSummary-root {
+    border-radius: 8px !important;
+
+
+}
+
+.MuiButtonBase-root.MuiAccordionSummary-root.Mui-expanded.MuiAccordionSummary-gutters.css-1f773le-MuiButtonBase-root-MuiAccordionSummary-root {
+    min-height: 50px;
+    margin: 0 0 !important;
+    border-radius: 8px !important;
+    @apply transition-all;
+
+    &.active {
+        @apply text-white;
+        background-color: #635EF7 !important;
+
+
+        svg {
+            @apply text-white;
+        }
+    }
+}
+
+.MuiAccordionSummary-content.Mui-expanded.MuiAccordionSummary-contentGutters.css-eqpfi5-MuiAccordionSummary-content {
+    min-height: none;
+    margin: 0 0 !important;
+
+}

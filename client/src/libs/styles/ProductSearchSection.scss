@@ -1,8 +1,20 @@
 .productSearch__wrapper {
     @apply w-[92%] mx-auto pt-6 pb-12;
 
+    .productSearch__breadcrumbs {
+        @apply mb-4;
+    }
+
+    .productSearch__content {
+        @apply grid grid-cols-12 gap-10;
+    }
+
+    .productSearch__info {
+        @apply col-span-9;
+    }
+
     .productSearch__heading {
-        @apply py-4 flex gap-3 items-center;
+        @apply flex justify-between gap-3 items-center;
 
         h1 {
             @apply text-2xl relative;
@@ -22,7 +34,7 @@
     }
 
     .productSearch__filters {
-        @apply flex items-center gap-5;
+        @apply col-span-3;
     }
 
     .strong {

@@ -1,12 +1,13 @@
 'use client';
 import React from 'react';
 import '../libs/styles/ProductSearchSection.scss';
-import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
-import PriceFilter from './PriceFilter';
-import SeasonFilter from './SeasonFilter';
-import SizeFilter from './SizeFilter';
-import NameFilter from './NameFilter';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import ProductList from './ProductList';
+import AppliedFilters from './AppliedFilters';
+import SortFilter from './SortFilter';
+import SearchResult from './SearchResult';
+import ProductSearchBreadcrumb from './ProductSearchBreadcrumb';
+import MenuFilter from './MenuFilter';
 
 
 const ProductSearchSection = () => {
@@ -17,22 +18,29 @@ const ProductSearchSection = () => {
 
     return (
         <div className='productSearch__wrapper'>
-            <div className="productSearch__heading">
-                <h1>
-                    Results for <span className='strong'>
-                        {search.get('name') ? search.get('name')?.toUpperCase().replaceAll("-", " ") : "ALL"}</span>
-                </h1>
-                {
-                    search.get('name') && <NameFilter />
-                }
+            <div className="productSearch__breadcrumbs">
+                <ProductSearchBreadcrumb />
             </div>
-            <div className="productSearch__filters">
-                <PriceFilter />
-                <SeasonFilter />
-                <SizeFilter />
-            </div>
-            <div className="productSearch__products">
-                <ProductList />
+            <div className="productSearch__content">
+                <div className="productSearch__filters">
+                    <MenuFilter />
+                </div>
+                <div className='productSearch__info'>
+                    <div className="productSearch__heading">
+                        <div className='heading__left'>
+                            <SearchResult nameFilter={search.get('name')} />
+                        </div>
+                        <div className="heading__right">
+                            <SortFilter />
+                        </div>
+                    </div>
+                    <div className="productSearch__appliedFilter">
+                        <AppliedFilters />
+                    </div>
+                    <div className="productSearch__products">
+                        <ProductList />
+                    </div>
+                </div>
             </div>
         </div>
     )

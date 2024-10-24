@@ -4,7 +4,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Menu } from '@mui/material';
+import { Menu, Skeleton } from '@mui/material';
 import '../libs/styles/filterPart.scss';
 import { Button, Error } from './ui';
 import http from '@/libs/configs/http';
@@ -37,10 +37,6 @@ const SizeFilter = () => {
             .catch((err) => { setError(true); setLoading(false); })
     }, []);
 
-    const handleClick = useCallback((event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    }, [])
-
     const handleClose = useCallback(() => {
         setAnchorEl(null);
     }, []);
@@ -54,11 +50,6 @@ const SizeFilter = () => {
         }
 
         setFilter(`${pathname}?${params.toString()}` as string);
-    }
-
-    const handleChangeSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-        updateQuery("size", e.currentTarget.value);
-        // setCurPrice(+e.currentTarget.value);
     }
 
     const handleConfirm = () => {
@@ -86,60 +77,65 @@ const SizeFilter = () => {
 
     }
 
+    if (error) {
+        return <React.Fragment>
+            <Error />
+        </React.Fragment>
+    }
+
     if (loading) {
         return <React.Fragment>
-            <button className="navbar__btn" onClick={handleClick}>
-                Size
-                {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            </button>
-            <Menu
-                className="navbar__menu"
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-            >
-                <Error />
-            </Menu>
+            <div className='size__wrapper'>
+                <Skeleton variant="rounded" width={40} height={40} />
+                <Skeleton variant="rounded" width={40} height={40} />
+                <Skeleton variant="rounded" width={40} height={40} />
+                <Skeleton variant="rounded" width={40} height={40} />
+            </div>
+            <div className="btn-section">
+                <Button
+                    text='Cancel'
+                    primary={false}
+                    callback={handleCancel}
+                    style='!rounded-md'
+                    disable
+                />
+                <Button
+                    text='Apply'
+                    primary
+                    callback={handleConfirm}
+                    style='!rounded-md'
+                    disable
+                />
+            </div>
         </React.Fragment>
     }
 
 
     return (
         <React.Fragment>
-            <button className="navbar__btn" onClick={handleClick}>
-                Size
-                {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            </button>
-            <Menu
-                className="navbar__menu"
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-            >
-                <div className='size__wrapper'>
-                    {
-                        sizes && sizes.map((size, idx) => {
-                            return <div className={`sizeItem ${curChoice.split("-").includes(size.sizeTag) ? 'active' : ''}`} key={idx} onClick={() => handleChoice(size)}>
-                                <span>{size.sizeTag}</span>
-                            </div>
-                        })
-                    }
-                </div>
-                <div className="btn-section">
-                    <Button
-                        text='Cancel'
-                        primary={false}
-                        callback={handleCancel}
-                        style='!rounded-md'
-                    />
-                    <Button
-                        text='Apply'
-                        primary
-                        callback={handleConfirm}
-                        style='!rounded-md'
-                    />
-                </div>
-            </Menu>
+            <div className='size__wrapper'>
+                {
+                    sizes && sizes.map((size, idx) => {
+                        return <div className={`sizeItem ${curChoice.split("-").includes(size.sizeTag) ? 'active' : ''}`} key={idx} onClick={() => handleChoice(size)}>
+                            <span>{size.sizeTag}</span>
+                        </div>
+                    })
+                }
+            </div>
+            <div className="btn-section">
+                <Button
+                    text='Cancel'
+                    primary={false}
+                    callback={handleCancel}
+                    style='!rounded-md'
+                />
+                <Button
+                    text='Apply'
+                    primary
+                    callback={handleConfirm}
+                    style='!rounded-md'
+                />
+            </div>
         </React.Fragment>
     )
 }

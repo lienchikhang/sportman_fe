@@ -47,7 +47,7 @@ const Product: React.FC<Props> = ({ product, style }) => {
     </div>;
 
     return (
-        <div className='product__wrapper'>
+        <div className={`product__wrapper ${style}`}>
             <div className="product__top">
                 <div className="color__wrapper">
                     {

@@ -1,8 +1,6 @@
 .navbar__btn {
     @apply px-4 py-2 font-medium border-2 rounded-lg;
     border-color: #635EF7;
-    // color: ;
-    // background-color: #635EF7;
 
     svg {
         @apply ml-1;
@@ -18,22 +16,32 @@
         // color: #635EF7;
     }
 
-    .btn-section {
-        @apply flex gap-2;
+}
+
+.MuiAccordionDetails-root.css-15v22id-MuiAccordionDetails-root {
+    padding: 0 !important;
+    margin-top: 14px !important;
+}
+
+.btn-section {
+    @apply w-full flex items-center gap-2;
+
+    button {
+        @apply w-1/2;
     }
 }
 
 
 .MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list {
-    @apply p-4 max-h-[300px] overflow-scroll;
+    @apply p-4 max-h-[300px] overflow-scroll max-w-[300px];
 }
 
 .seasonItem {
-    @apply px-4 py-1 border-2 rounded-md mb-2 flex items-center gap-5 justify-center cursor-pointer;
+    @apply px-4 w-[135px] py-1 border-2 rounded-md flex items-center gap-1 justify-center cursor-pointer;
 
     &.active {
         color: #635EF7;
-        border-color: #635EF7;
+        border-color: #635EF7
     }
 }
 
@@ -48,4 +56,9 @@
         color: #635EF7;
         border-color: #635EF7;
     }
+}
+
+.input-price {
+    @apply w-full px-4 py-1 mb-4 rounded-md border-2;
+    border-color: #635EF7;
 }

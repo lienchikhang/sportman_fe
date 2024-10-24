@@ -1,10 +1,7 @@
 'use client';
-import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Menu } from '@mui/material';
+import { Menu, Skeleton } from '@mui/material';
 import '../libs/styles/filterPart.scss';
 import { Button, Error } from './ui';
 import http from '@/libs/configs/http';
@@ -33,7 +30,7 @@ const SeasonFilter = () => {
         http.get("/seasons")
             .then((res) => {
                 if (res?.status != 200) { setError(true); return; }
-                setSeasons(res?.data?.content);
+                setSeasons(res?.data?.content?.seasons);
                 setLoading(false);
             })
             .catch((err) => { setError(true); setLoading(false); })
@@ -58,10 +55,10 @@ const SeasonFilter = () => {
         setFilter(`${pathname}?${params.toString()}` as string);
     }
 
-    const handleChangeSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-        updateQuery("season", e.currentTarget.value);
-        // setCurPrice(+e.currentTarget.value);
-    }
+    // const handleChangeSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     updateQuery("season", e.currentTarget.value);
+    //     // setCurPrice(+e.currentTarget.value);
+    // }
 
     const handleConfirm = () => {
         if (!filter) return;
@@ -81,36 +78,43 @@ const SeasonFilter = () => {
         updateQuery("season", season.yearStart + "-" + season.yearEnd);
     }
 
+    if (error) {
+        return <Error />
+    }
+
     if (loading) {
         return <React.Fragment>
-            <button className="navbar__btn" onClick={handleClick}>
-                Season
-                {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            </button>
-            <Menu
-                className="navbar__menu"
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-            >
-                <Error />
-            </Menu>
+            <div className='flex flex-wrap items-center gap-2 mb-4'>
+                <Skeleton variant="rounded" width={135} height={36} />
+                <Skeleton variant="rounded" width={135} height={36} />
+                <Skeleton variant="rounded" width={135} height={36} />
+                <Skeleton variant="rounded" width={135} height={36} />
+                <Skeleton variant="rounded" width={135} height={36} />
+                <Skeleton variant="rounded" width={135} height={36} />
+            </div>
+            <div className="btn-section">
+                <Button
+                    text='Cancel'
+                    primary={false}
+                    callback={handleCancel}
+                    style='!rounded-md'
+                    disable
+                />
+                <Button
+                    text='Apply'
+                    primary
+                    callback={handleConfirm}
+                    style='!rounded-md'
+                    disable
+                />
+            </div>
         </React.Fragment>
     }
 
 
     return (
         <React.Fragment>
-            <button className="navbar__btn" onClick={handleClick}>
-                Season
-                {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            </button>
-            <Menu
-                className="navbar__menu"
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-            >
+            <div className='flex flex-wrap items-center gap-2 mb-4'>
                 {
                     seasons && seasons.map((ss, idx) => {
                         return <div className={`seasonItem ${curChoice == ss.yearStart + "-" + ss.yearEnd ? 'active' : ''}`} key={idx} onClick={() => handleChoice(ss)}>
@@ -120,21 +124,21 @@ const SeasonFilter = () => {
                         </div>
                     })
                 }
-                <div className="btn-section">
-                    <Button
-                        text='Cancel'
-                        primary={false}
-                        callback={handleCancel}
-                        style='!rounded-md'
-                    />
-                    <Button
-                        text='Apply'
-                        primary
-                        callback={handleConfirm}
-                        style='!rounded-md'
-                    />
-                </div>
-            </Menu>
+            </div>
+            <div className="btn-section">
+                <Button
+                    text='Cancel'
+                    primary={false}
+                    callback={handleCancel}
+                    style='!rounded-md'
+                />
+                <Button
+                    text='Apply'
+                    primary
+                    callback={handleConfirm}
+                    style='!rounded-md'
+                />
+            </div>
         </React.Fragment>
     )
 }
