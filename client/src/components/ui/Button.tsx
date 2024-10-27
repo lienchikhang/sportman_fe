@@ -11,6 +11,8 @@ interface Props {
     primary: boolean,
     disable?: boolean,
     onlyLoading?: boolean,
+    type?: any,
+    timer?: number,
     showNotice: (mess: string, isSuccess: boolean) => void,
     callback: () => void;
 }
@@ -22,6 +24,8 @@ const Button: React.FC<Props> = ({
     primary = true,
     disable = false,
     onlyLoading = false,
+    type = "button",
+    timer = 1800,
     showNotice,
     callback
 }) => {
@@ -38,27 +42,30 @@ const Button: React.FC<Props> = ({
             //check
             http.introspect(`auth/introspect-token`)
                 .then((res) => {
-                    callback();
+                    setTimeout(() => {
+                        callback();
+                        setLoading(false);
+                    }, timer)
                 })
                 .catch((err) => {
-                    if (err.response.status == 400) {
+                    if (err?.response?.status == 400) {
                         setTimeout(() => {
                             showNotice('Please login!', false);
                             setLoading(false);
-                        }, 1800)
+                        }, timer)
                     }
                 });
+        } else {
+            setTimeout(() => {
+                callback();
+                setLoading(false);
+            }, timer)
         }
-
-        setTimeout(() => {
-            // callback();
-            setLoading(false);
-        }, 1800)
     }
 
     return (
         <button
-            type='button'
+            type={type}
             className={`
                 button ${style ? style : ''}
                 ${primary ? 'primary' : 'secondary'} 

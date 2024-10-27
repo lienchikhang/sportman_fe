@@ -19,6 +19,7 @@ const ExploreProduct = () => {
                             <h2>LOVE THE SWIM YOU'RE IN</h2>
                             <Button
                                 primary={true}
+                                showNotice={() => { }}
                                 callback={() => console.log('explore')}
                                 text='View All'
                             />
@@ -30,6 +31,7 @@ const ExploreProduct = () => {
                             <h2>LOVE THE SWIM YOU'RE IN</h2>
                             <Button
                                 primary={true}
+                                showNotice={() => { }}
                                 callback={() => console.log('explore')}
                                 text='View All'
                             />

@@ -34,7 +34,7 @@ const Showcase = () => {
     }, []);
 
     const handleExplore = () => {
-        route.push("/products?page=1&pageSize=25&sort=asc")
+        route.push("/home/products?page=1&pageSize=25&sort=asc")
     }
 
     if (loading) {

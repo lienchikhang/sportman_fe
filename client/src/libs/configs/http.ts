@@ -10,6 +10,8 @@ const http = {
             method: "GET",
         }).then((res) => res.json());
 
+        console.log({ cookie });
+
         return await axiosInstance.get(endpoint, {
             headers: {
                 "Authorization": cookie?.token,

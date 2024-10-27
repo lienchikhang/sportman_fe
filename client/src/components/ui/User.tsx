@@ -45,7 +45,7 @@ const iconsNotLoggedIn = [
 ]
 
 const User = () => {
-    const [session, setSession] = useState(1);
+    const [session, setSession] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
 
     const handleClick = (endpoint: string) => {

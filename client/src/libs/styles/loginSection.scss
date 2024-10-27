@@ -1,0 +1,94 @@
+.login__wrapper {
+    @apply py-8 px-24 grid grid-cols-12 gap-5;
+
+    .login__form {
+        @apply col-span-6 p-12 flex flex-col justify-center items-center;
+
+        .form__heading {
+            @apply font-semibold text-5xl mb-6;
+        }
+
+        .form__title {
+            @apply mb-6;
+        }
+
+        .form__divide {
+
+            @apply relative mb-6;
+
+            p {
+                &::after {
+                    content: '';
+                    @apply block absolute top-3 left-[110%] w-24 h-[2px] bg-black;
+                }
+
+                &::before {
+                    content: '';
+                    @apply block absolute top-3 right-[110%] w-24 h-[2px] bg-black;
+                }
+            }
+        }
+
+        .form__media {
+            @apply flex gap-5 items-center mb-36;
+        }
+
+        .form__register {
+            @apply text-[14px];
+
+            span {
+                @apply font-semibold;
+            }
+        }
+    }
+
+    .login__draw {
+        @apply col-span-6 p-12 relative rounded-2xl bg-purple-300;
+
+        img {
+            @apply object-cover absolute w-full h-full top-0 left-0;
+        }
+
+        h1 {
+            @apply absolute z-20 top-3/4 left-0;
+        }
+    }
+
+    .form__wrapper {
+        @apply w-full px-14 py-10;
+
+        .modal__form {
+            @apply py-4 px-5 rounded-full mb-4 w-full border border-black;
+
+            input {
+                @apply outline-none w-full text-base;
+            }
+
+            &.error {
+                @apply border-2 border-red-500 text-red-500 mb-2;
+            }
+        }
+
+        .error__sub-text {
+            @apply text-red-500 px-4 text-sm mb-2;
+        }
+
+        .form__forgot {
+            @apply text-sm text-right mb-6;
+        }
+
+        .btn__wrapper {
+            button {
+                @apply w-full rounded-full px-6 py-4 text-white transition-all;
+
+                &:hover {
+                    @apply scale-105;
+                }
+
+                &:active {
+                    @apply scale-95;
+                }
+            }
+        }
+    }
+}

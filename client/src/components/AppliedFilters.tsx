@@ -11,7 +11,6 @@ const AppliedFilters = () => {
     const pathname = usePathname();
     const query = new URLSearchParams(params as any);
     useEffect(() => {
-
         const fils = query.toString().split('&');
         fils.splice(0, 2);
         setFilters(fils);
