@@ -7,6 +7,7 @@ import http from '@/libs/configs/http';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
+import { useUser } from '@/libs/contexts/user.context';
 
 
 type Inputs = {
@@ -25,12 +26,13 @@ const LoginForm = () => {
         formState: { errors },
     } = useForm<Inputs>();
     const router = useRouter();
+    const { user, login } = useUser();
 
     const onSubmit: SubmitHandler<Inputs> = async (formData) => {
 
         http.post(`/auth/login`, { ...formData })
             .then((res) => {
-                console.log({ res })
+                console.log({ login: res })
 
                 //call api server
                 fetch('/api/auth', {
@@ -44,7 +46,6 @@ const LoginForm = () => {
                     .then((res) => res.json())
                     .then((res) => {
                         console.log('res\'s server', res);
-                        toast.success('success');
                     })
                     .catch((err) => {
                         console.log('err\'s server', err);
@@ -52,9 +53,16 @@ const LoginForm = () => {
                     })
 
                 //set context user
+                login({
+                    ...res?.data?.content?.userInfo
+                });
+                localStorage.setItem('user', JSON.stringify({ ...res?.data?.content?.userInfo }));
+                toast.success('Login success');
 
                 //redirect or reload (if we have a middleware)
-                router.push("/home");
+                setTimeout(() => {
+                    router.push("/home");
+                }, 1000);
             })
             .catch((err) => {
                 console.log({ err })
@@ -80,7 +88,7 @@ const LoginForm = () => {
                                     {/* <label htmlFor="">Email</label> */}
                                     <input
                                         type="text"
-                                        placeholder="username@example.com"
+                                        placeholder="Username"
                                         {...register("username")}
                                     // className={`${errors.email ? "error" : ""}`}
                                     />
@@ -104,7 +112,7 @@ const LoginForm = () => {
                             return (
                                 <div className={`modal__form ${errors.username && "error"}`}>
                                     {/* <label htmlFor="">Password</label> */}
-                                    <input type="password" {...register("password")} />
+                                    <input type="password" {...register("password")} placeholder='Password' />
                                 </div>
                             );
                         }}

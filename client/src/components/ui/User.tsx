@@ -12,6 +12,8 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import PersonIcon from '@mui/icons-material/Person';
 import "../../libs/styles/ui/user.scss";
 import { actions, actionsNotLoggedIn } from '@/libs/constants/userHeader';
+import { useUser } from '@/libs/contexts/user.context';
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 
 const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -45,14 +47,19 @@ const iconsNotLoggedIn = [
 ]
 
 const User = () => {
-    const [session, setSession] = useState(0);
+    // const [session, setSession] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
+    const { user, logout } = useUser();
 
     const handleClick = (endpoint: string) => {
-
+        logout();
     }
 
-    if (!session) {
+    const handleLogout = () => {
+        logout();
+    }
+
+    if (!user) {
         return (
             <motion.div
                 onHoverStart={() => setIsHovered(true)}
@@ -101,10 +108,10 @@ const User = () => {
             }}
         >
             <div className='user__wrapper py-1'>
-                <AvatarCustom url='' name="khang" />
-                <span>{'khag'}</span>
+                <AvatarCustom url={user.avatar || ''} name={user.username} />
+                <span>{user.username}</span>
                 <KeyboardArrowDownIcon />
-                <motion.ul
+                {/* <motion.ul
                     className="user__sub"
                     variants={container}
                     initial="hidden"
@@ -121,12 +128,21 @@ const User = () => {
                             }}
                         >
                             {icons[index]}
-                            <p>
+                            <p onClick={handleLogout}>
                                 {action.toUpperCase()}
                             </p>
                         </motion.li>
                     ))}
-                </motion.ul>
+                </motion.ul> */}
+                <Popover className="relative user__sub">
+                    <PopoverButton>Solutions</PopoverButton>
+                    <PopoverPanel anchor="bottom" className="flex flex-col">
+                        <a href="/analytics">Analytics</a>
+                        <a href="/engagement">Engagement</a>
+                        <a href="/security">Security</a>
+                        <p onClick={handleLogout}>Logout</p>
+                    </PopoverPanel>
+                </Popover>
             </div>
         </motion.div>
     );

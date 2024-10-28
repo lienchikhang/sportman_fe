@@ -2,11 +2,15 @@ import React from 'react';
 import '../libs/styles/loginSection.scss';
 import LoginForm from './LoginForm';
 import FacebookLogin from './FacebookLogin';
+import HomeIcon from '@mui/icons-material/Home';
 
 const LoginSection = () => {
     return (
         <div className='login__wrapper'>
             <div className="login__form">
+                <div className='home__nav'>
+                    <HomeIcon />
+                </div>
                 <h1 className='form__heading'>Welcome back!</h1>
                 <p className='form__title'>Choose your favorite football club with <strong>SportMan</strong></p>
                 <LoginForm />

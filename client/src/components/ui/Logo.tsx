@@ -8,7 +8,7 @@ export const Logo = () => {
     const router = useRouter();
 
     const handleClick = () => {
-        router.push("/");
+        router.push("/home");
     }
 
     return (

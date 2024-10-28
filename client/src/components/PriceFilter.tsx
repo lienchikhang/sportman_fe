@@ -1,6 +1,6 @@
 'use client';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../libs/styles/filterPart.scss';
 import { Button } from './ui';
 
@@ -11,6 +11,22 @@ const PriceFilter = () => {
     const [curPrice, setCurPrice] = useState(0);
     const router = useRouter();
     const pathname = usePathname();
+
+    //check has filter or not
+    useEffect(() => {
+        const params = new URLSearchParams(query as any);
+
+        if (params.has('price')) {
+            const price = params.get('price');
+            if (!price) return;
+            setCurPrice(+price);
+        }
+        else {
+            setCurPrice(0);
+        }
+
+
+    }, [query.toString()])
 
     const updateQuery = (key: string, value: string) => {
         const params = new URLSearchParams(query as any);
@@ -48,12 +64,14 @@ const PriceFilter = () => {
             <div className="btn-section">
                 <Button
                     text='Cancel'
+                    showNotice={() => { }}
                     primary={false}
                     callback={handleCancel}
                     style='!rounded-md'
                 />
                 <Button
                     text='Apply'
+                    showNotice={() => { }}
                     primary
                     callback={handleConfirm}
                     style='!rounded-md'

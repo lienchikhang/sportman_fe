@@ -23,8 +23,6 @@ const ProductList: React.FC<Props> = ({ notify }) => {
     const [totalPage, setTotalPage] = useState(0);
     const [curPage, setCurPage] = useState(1);
 
-    console.log({ pathname })
-
     useEffect(() => {
         setLoading(true);
         http.get(`/products?${params.toString()}`)

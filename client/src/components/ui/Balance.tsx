@@ -5,10 +5,12 @@ import { motion } from 'framer-motion';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import '../../libs/styles/ui/balance.scss';
 import { convertPrice } from '@/libs/funcs/priceFuncs';
+import { useUser } from '@/libs/contexts/user.context';
 
 const Balance = () => {
 
     const [price, setPrice] = useState(0);
+    const { user } = useUser();
 
     return (
         <Tooltip title="Account Balance">
@@ -19,17 +21,14 @@ const Balance = () => {
                     borderRadius: "100%"
                 }}
                 transition={{
-                    // type: "spring",
-                    // stiffness: 140,
-                    // damping: 20,
                     duration: .4
                 }}
             >
 
                 {
-                    price ? <div className='balance__wrapper'>
+                    user ? <div className='balance__wrapper'>
                         <AccountBalanceWalletIcon />
-                        <span>{convertPrice(price.toLocaleString())}</span>
+                        <span>{convertPrice(user.balance.toLocaleString())}</span>
                     </div> : <div className='balance__wrapper'>
                         <AccountBalanceWalletIcon />
                     </div>

@@ -23,12 +23,10 @@ const NewSection = () => {
 
     }, []);
 
-    console.log({ products });
-
     if (loading) {
         return <div className='right__new'>
-            <Product product={null} />
-            <Product product={null} />
+            <Product product={null} notify={() => { }} />
+            <Product product={null} notify={() => { }} />
         </div>
     }
 
@@ -39,6 +37,7 @@ const NewSection = () => {
                 <Button
                     callback={() => window.location.reload()}
                     primary
+                    showNotice={() => { }}
                     text='Reload'
                 />
             </div>
@@ -48,7 +47,7 @@ const NewSection = () => {
     return (
         <div className='right__new'>
             {products && products.map((pro: IProduct, idx: number) => {
-                return <Product key={idx} product={pro} />
+                return <Product key={idx} product={pro} notify={() => { }} />
             })}
         </div>
     )

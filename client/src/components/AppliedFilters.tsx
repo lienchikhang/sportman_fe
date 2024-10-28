@@ -16,9 +16,8 @@ const AppliedFilters = () => {
         setFilters(fils);
     }, [params.toString()]);
 
-    console.log({ filters })
-
     const handleDelete = (key: string) => {
+        if (key == 'sort') return;
         const params = new URLSearchParams(query as any);
         params.delete(key);
         route.push(`${pathname}?${params.toString()}`);
@@ -31,9 +30,10 @@ const AppliedFilters = () => {
                 filters.map((filter, idx) => {
                     return <Chip
                         key={idx}
-                        label={filter.split('=')[1]}
+                        //check is falsy or not, if falsy => type = NaN => no need to add "<="
+                        label={+filter.split('=')[1] ? `<= ${filter.split('=')[1]}` : filter.split('=')[1]}
                         variant="outlined"
-                        // onClick={handleClick}
+                        disabled={filter.split('=')[0] == 'sort'}
                         onDelete={() => handleDelete(filter.split('=')[0])}
                     />
                 })

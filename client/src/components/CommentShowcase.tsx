@@ -22,7 +22,6 @@ const CommentShowcase = () => {
     useEffect(() => {
         http.get("/rates?pageSize=25")
             .then((res) => {
-                console.log(res.data);
                 if (res?.status != 200) { setError(true); return; }
                 setComments(res?.data?.content?.rates);
                 setLoading(false);

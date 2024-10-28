@@ -26,6 +26,7 @@ const SizeFilter = () => {
     const [sizes, setSizes] = useState<ISize[]>([]);
     const open = Boolean(anchorEl);
 
+    //fetch data
     useEffect(() => {
         setLoading(true);
         http.get("/sizes?pageSize=12")
@@ -37,9 +38,20 @@ const SizeFilter = () => {
             .catch((err) => { setError(true); setLoading(false); })
     }, []);
 
-    const handleClose = useCallback(() => {
-        setAnchorEl(null);
-    }, []);
+    //check has filter or not
+    useEffect(() => {
+        const params = new URLSearchParams(query as any);
+
+        if (params.has('size')) {
+            //update state
+            setCurChoice(`${params.get('size')}`)
+        }
+        else {
+            setCurChoice('');
+        }
+
+    }, [query.toString()])
+
 
     const updateQuery = (key: string, value: string) => {
         const params = new URLSearchParams(query as any);

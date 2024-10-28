@@ -18,7 +18,7 @@ const HightLightWord: React.FC<Props> = ({ sentence, word }) => {
     return (
         <p>
             {beforeMatch}
-            <span className='font-bold'>{match}</span>
+            <span className='font-semibold text-[18px]'>{match}</span>
             {afterMatch}
         </p>
     )

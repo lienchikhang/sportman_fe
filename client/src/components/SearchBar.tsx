@@ -36,14 +36,12 @@ const SearchBar = () => {
         }
     }, [search.get("name")]);
 
-    console.log({ items });
-
     const handleClickItem = (endpoint: string) => {
         setRecOpen(false);
 
         setTimeout(() => {
             setInputValue('')
-            router.push(`/products?page=1&pageSize=25&name=${endpoint}`);
+            router.push(`/home/products?page=1&pageSize=25&name=${endpoint}`);
         }, 300);
     }
 
@@ -62,7 +60,6 @@ const SearchBar = () => {
             http.get(`products/get-list-name?name=${value}&page=${curPage}`)
                 .then((res) => {
                     if (res?.status != 200) { setHasError(true); return; }
-                    console.log({ data: res.data });
                     setItems(res?.data?.content?.products);
                     setTotalPage(res?.data?.content?.totalPage);
                     setTotalElements(res?.data?.content?.totalElements);
@@ -99,7 +96,7 @@ const SearchBar = () => {
         if (e.key === 'Enter') {
             setRecOpen(false);
             e.currentTarget.blur();
-            router.push(`/products?page=1&pageSize=25&name=${e.currentTarget.value}`);
+            router.push(`/home/products?page=1&pageSize=25&sort=asc&name=${e.currentTarget.value}`);
         }
     };
 

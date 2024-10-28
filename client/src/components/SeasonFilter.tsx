@@ -13,7 +13,7 @@ interface ISeason {
 
 const SeasonFilter = () => {
 
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    // const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const query = useSearchParams();
     const [filter, setFilter] = useState('');
     const [curChoice, setCurChoice] = useState('');
@@ -22,9 +22,8 @@ const SeasonFilter = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [seasons, setSeasons] = useState<ISeason[]>([]);
-    const open = Boolean(anchorEl);
 
-
+    //fetch data
     useEffect(() => {
         setLoading(true);
         http.get("/seasons")
@@ -36,13 +35,19 @@ const SeasonFilter = () => {
             .catch((err) => { setError(true); setLoading(false); })
     }, []);
 
-    const handleClick = useCallback((event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    }, [])
+    //check has filter or not
+    useEffect(() => {
+        const params = new URLSearchParams(query as any);
 
-    const handleClose = useCallback(() => {
-        setAnchorEl(null);
-    }, []);
+        if (params.has('season')) {
+            setCurChoice(`${params.get('season')}`)
+        }
+        else {
+            setCurChoice('');
+        }
+
+
+    }, [query.toString()])
 
     const updateQuery = (key: string, value: string) => {
         const params = new URLSearchParams(query as any);
@@ -54,11 +59,6 @@ const SeasonFilter = () => {
 
         setFilter(`${pathname}?${params.toString()}` as string);
     }
-
-    // const handleChangeSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     updateQuery("season", e.currentTarget.value);
-    //     // setCurPrice(+e.currentTarget.value);
-    // }
 
     const handleConfirm = () => {
         if (!filter) return;
@@ -98,12 +98,14 @@ const SeasonFilter = () => {
                     primary={false}
                     callback={handleCancel}
                     style='!rounded-md'
+                    showNotice={() => { }}
                     disable
                 />
                 <Button
                     text='Apply'
                     primary
                     callback={handleConfirm}
+                    showNotice={() => { }}
                     style='!rounded-md'
                     disable
                 />
@@ -130,12 +132,14 @@ const SeasonFilter = () => {
                     text='Cancel'
                     primary={false}
                     callback={handleCancel}
+                    showNotice={() => { }}
                     style='!rounded-md'
                 />
                 <Button
                     text='Apply'
                     primary
                     callback={handleConfirm}
+                    showNotice={() => { }}
                     style='!rounded-md'
                 />
             </div>
