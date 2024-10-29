@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import "../../libs/styles/ui/button.scss";
 import { CircularProgress } from '@mui/material';
 import http from '@/libs/configs/http';
+import { useUser } from '@/libs/contexts/user.context';
+import { useRouter } from 'next/navigation';
 
 interface Props {
     text: string,
@@ -32,6 +34,8 @@ const Button: React.FC<Props> = ({
 
 
     const [isLoading, setLoading] = useState(false);
+    const { logout } = useUser();
+    const router = useRouter();
 
     const handleClick = () => {
 
@@ -48,10 +52,22 @@ const Button: React.FC<Props> = ({
                     }, timer)
                 })
                 .catch((err) => {
+
+                    console.log('err in hasIntrospect', err);
+
                     if (err?.response?.status == 400) {
                         setTimeout(() => {
                             showNotice('Please login!', false);
                             setLoading(false);
+                        }, timer)
+                    }
+
+                    if (err?.response?.status == 401 && err?.response?.msg == 'LoginExpired') {
+                        setTimeout(() => {
+                            showNotice('Login Expired', false);
+                            setLoading(false);
+                            logout();
+                            router.refresh();
                         }, timer)
                     }
                 });

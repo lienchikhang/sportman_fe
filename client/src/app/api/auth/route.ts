@@ -6,7 +6,7 @@ export async function POST(req: Request, res: NextResponse) {
 
     const payload = await new Response(req.body).json();
 
-    // console.log({ payloadInSer: payload?.data?.content });
+    console.log({ payloadInSer: payload?.data?.content });
 
     const accessToken = payload?.data?.content?.accessToken;
     const refreshToken = payload?.data?.content?.refreshToken;

@@ -8,36 +8,39 @@ export async function middleware(request: NextRequest) {
     //get token
     const local = cookies().get('access')?.value;
 
-    console.log('local', local);
+    console.log('local cookies', local);
     console.log('next_url', request.nextUrl);
     console.log('path', request.nextUrl.pathname)
 
     if (local) {
 
-        const rs = await http.post('/auth/introspect-token', {
-            token: local,
-        });
+        console.log('has cookie');
 
-        console.log('resssss', rs)
+        try {
+            const rs = await http.post('/auth/introspect-token', {
+                token: local,
+            });
 
-        if (rs?.data?.content?.auth) {
-            if (request.nextUrl.pathname.includes('') || request.nextUrl.pathname.includes('register')) return NextResponse.redirect(new URL('/home', request.url))
+            console.log('resssss', rs)
+
+            if (rs?.data?.content?.auth) {
+                if (request.nextUrl.pathname.includes('') || request.nextUrl.pathname.includes('register')) return NextResponse.redirect(new URL('/home', request.url))
+            }
+
+        } catch (error) {
+            console.log('catch error in introspect', error);
         }
 
-        // if (rs) {
-        //     //case go to login => back to home
-        //     if (request.nextUrl.pathname.includes('login')) return NextResponse.redirect(new URL('/', request.url))
-        //     //case go to register => back to home
-        //     if (request.nextUrl.pathname.includes('register')) return NextResponse.redirect(new URL('/', request.url))
-        //     //case go to profile => pass
-        //     return NextResponse.next();
-        // } else {
-        //     if (!request.nextUrl.pathname.includes('login')) return NextResponse.redirect(new URL('/auth/login', request.url));
-        //     if (request.nextUrl.pathname.includes('profile')) return NextResponse.redirect(new URL('/auth/login', request.url));
-        // }
+        console.log('after cookie');
+
+        return NextResponse.next();
+
     } else {
         // if (!request.nextUrl.pathname.includes('login') && !request.nextUrl.pathname.includes('register')) return NextResponse.redirect(new URL('/auth/login', request.url));
         if (request.nextUrl.pathname.includes('me')) return NextResponse.redirect(new URL('/', request.url));
+
+        return NextResponse.next();
+
     }
 }
 

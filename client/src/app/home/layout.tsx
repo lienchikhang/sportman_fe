@@ -17,12 +17,10 @@ export default function HomeLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body className={inter.className}>
-                <Header />
-                {children}
-                <Footer />
-            </body>
-        </html>
+        <div>
+            <Header />
+            {children}
+            <Footer />
+        </div>
     );
 }
