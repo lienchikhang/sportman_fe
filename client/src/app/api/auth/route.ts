@@ -14,6 +14,8 @@ export async function POST(req: Request, res: NextResponse) {
     cookies().set("access", accessToken);
     cookies().set("refresh", refreshToken);
 
+    console.log({ accessToken, refreshToken });
+
     // Xử lý hoặc trả về cookies/token
     return NextResponse.json({ isDone: true });
 }

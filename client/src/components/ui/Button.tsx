@@ -62,7 +62,7 @@ const Button: React.FC<Props> = ({
                         }, timer)
                     }
 
-                    if (err?.response?.status == 401 && err?.response?.msg == 'LoginExpired') {
+                    if (err?.response?.status == 401 && err?.response?.data?.msg == 'LoginExpired') {
                         setTimeout(() => {
                             showNotice('Login Expired', false);
                             setLoading(false);

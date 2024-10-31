@@ -24,7 +24,6 @@ const SizeFilter = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [sizes, setSizes] = useState<ISize[]>([]);
-    const open = Boolean(anchorEl);
 
     //fetch data
     useEffect(() => {
@@ -52,40 +51,45 @@ const SizeFilter = () => {
 
     }, [query.toString()])
 
+    const handleChoice = (size: ISize) => {
 
-    const updateQuery = (key: string, value: string) => {
         const params = new URLSearchParams(query as any);
-        if (value) {
-            params.set(key, value);
-        } else {
-            params.delete(key);
+        const choices: string[] = curChoice.split('-');
+
+        if (choices.includes(size.sizeTag)) {
+
+            if (choices.length == 1) {
+                params.delete("size");
+                router.push(`${pathname}?${params.toString()}`);
+                return;
+            }
+
+            const updateChoice = choices.filter((choice) => {
+                return choice != size.sizeTag
+            }).join('-');
+
+            setCurChoice(updateChoice);
+            params.set("size", updateChoice);
+            router.push(`${pathname}?${params.toString()}`);
+            return;
         }
 
-        setFilter(`${pathname}?${params.toString()}` as string);
-    }
-
-    const handleConfirm = () => {
-        if (!filter) return;
-        router.push(filter);
-    }
-
-    const handleCancel = () => {
-        const params = new URLSearchParams(query as any);
-        params.delete('size');
-        setCurChoice("");
-        setFilter('');
-        router.push(`${pathname}?${params.toString()}`);
-    }
-
-    const handleChoice = (size: ISize) => {
         if (!curChoice) {
-            setCurChoice(size.sizeTag);
-            updateQuery("size", size.sizeTag);
+            choices.push(size.sizeTag);
+            setCurChoice(choices.join('-'));
+            // updateQuery("size", size.sizeTag);
+            params.set("size", choices.join(''));
         }
         else {
-            setCurChoice((prev) => prev + "-" + size.sizeTag);
-            updateQuery("size", curChoice + "-" + size.sizeTag);
+            // setCurChoice((prev) => prev + "-" + size.sizeTag);
+            choices.push(size.sizeTag);
+            setCurChoice(choices.join('-'));
+            // updateQuery("size", curChoice + "-" + size.sizeTag);
+            params.set("size", choices.join('-'));
         }
+
+        router.push(`${pathname}?${params.toString()}`);
+
 
     }
 
@@ -96,37 +100,19 @@ const SizeFilter = () => {
     }
 
     if (loading) {
-        return <React.Fragment>
+        return <>
             <div className='size__wrapper'>
                 <Skeleton variant="rounded" width={40} height={40} />
                 <Skeleton variant="rounded" width={40} height={40} />
                 <Skeleton variant="rounded" width={40} height={40} />
                 <Skeleton variant="rounded" width={40} height={40} />
             </div>
-            <div className="btn-section">
-                <Button
-                    text='Cancel'
-                    primary={false}
-                    callback={handleCancel}
-                    showNotice={() => { }}
-                    style='!rounded-md'
-                    disable
-                />
-                <Button
-                    text='Apply'
-                    primary
-                    callback={handleConfirm}
-                    showNotice={() => { }}
-                    style='!rounded-md'
-                    disable
-                />
-            </div>
-        </React.Fragment>
+        </>
     }
 
 
     return (
-        <React.Fragment>
+        <>
             <div className='size__wrapper'>
                 {
                     sizes && sizes.map((size, idx) => {
@@ -136,7 +122,7 @@ const SizeFilter = () => {
                     })
                 }
             </div>
-            <div className="btn-section">
+            {/* <div className="btn-section">
                 <Button
                     text='Cancel'
                     primary={false}
@@ -151,8 +137,8 @@ const SizeFilter = () => {
                     callback={handleConfirm}
                     style='!rounded-md'
                 />
-            </div>
-        </React.Fragment>
+            </div> */}
+        </>
     )
 }
 

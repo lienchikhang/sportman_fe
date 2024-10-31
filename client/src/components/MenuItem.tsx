@@ -5,6 +5,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SeasonFilter from './SeasonFilter';
 import SizeFilter from './SizeFilter';
 import PriceFilter from './PriceFilter';
+import ClubFilter from './ClubFilter';
 
 interface Props {
     type: string,
@@ -32,6 +33,7 @@ const MenuItem: React.FC<Props> = ({ type }) => {
                 {type == 'Season' && <SeasonFilter />}
                 {type == 'Size' && <SizeFilter />}
                 {type == 'Price' && <PriceFilter />}
+                {type == 'Club' && <ClubFilter />}
             </AccordionDetails>
         </Accordion>
     )

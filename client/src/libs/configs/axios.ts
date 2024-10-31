@@ -12,6 +12,7 @@ axiosInstance.interceptors.response.use(function (response) {
     return response;
 }, async function (error) {
 
+    console.log('running response interceptors')
     const originalRequest = error.config;
 
 
@@ -21,22 +22,17 @@ axiosInstance.interceptors.response.use(function (response) {
 
         try {
 
-            // Gọi API để refresh token
+            //call api get refresh token
             const cookie = await fetch("http://localhost:3000/api/get-refresh-token", {
                 method: "GET",
-            })
-                .then((res) => res.json())
-                .catch((err) => console.log('errrrr in refresh token', err));
+            }).then((res) => res.json())
 
-            console.log('refresh token', cookie.token);
+            console.log('refresh token', cookie?.token);
 
-            // const response = await http.refresh('http://localhost:8080/sportman/auth/refresh');
+            //call api refresh token
             const response = await axios.post(`http://localhost:8080/sportman/auth/refresh`, {
                 token: cookie.token,
             });
-
-            console.log('response from refresh token', response.status);
-            console.log('response body from refresh token', response.data);
 
             // if (response?.status == 401) Promise.reject('loginExpired');
 
@@ -50,20 +46,13 @@ axiosInstance.interceptors.response.use(function (response) {
             })
             await rs.json();
 
-            console.log('rs setting cookie server', rs);
-
-            // if (!response) throw new Error("No new access token");
-            await new Promise(resolve => setTimeout(resolve, 100));
-
             // Thêm token mới vào header Authorization
+            // [BE]:: điều chỉnh nhận token qua headers
             originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
 
-            // Thực hiện lại request cũ
-            console.log("Retrying original request with new access token:", originalRequest);
             return axiosInstance(originalRequest);
-        } catch (refreshError) {
-            console.log('error in out of process', refreshError);
-            console.log('out of process');
+        } catch (refreshError: any) {
+            console.log('error in out of process', refreshError?.response);
             // Xử lý nếu refresh token thất bại (ví dụ: logout user)
             return Promise.reject(refreshError);
         }

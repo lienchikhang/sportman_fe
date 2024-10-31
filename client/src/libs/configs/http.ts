@@ -41,8 +41,7 @@ const http = {
     },
 
     async introspect(endpoint: string): Promise<any> {
-        const accessToken = Cookies.get('access')
-        console.log('token in introspect', accessToken);
+        const accessToken = Cookies.get('access');
 
         return await axiosInstance.post(endpoint, {
             token: accessToken || '',

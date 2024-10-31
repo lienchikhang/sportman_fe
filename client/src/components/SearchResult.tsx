@@ -1,18 +1,20 @@
 'use client';
 import React from 'react';
 import NameFilter from './NameFilter';
+import { convertText } from '@/libs/funcs/textFuncs';
 
 interface Props {
     nameFilter: string | null,
+    totalResult: number,
 }
 
-const SearchResult: React.FC<Props> = ({ nameFilter }) => {
+const SearchResult: React.FC<Props> = ({ nameFilter, totalResult }) => {
     return (
         <React.Fragment>
             <div className='flex items-center gap-2'>
                 <h1>
-                    Results for <span className='strong'>
-                        {nameFilter ? nameFilter.toUpperCase().replaceAll("-", " ") : "ALL"}</span>
+                    <span className='font-semibold'>{totalResult} Results</span> for <span className='strong'>
+                        {nameFilter ? convertText(nameFilter, 30).toUpperCase().replaceAll("-", " ") : "ALL"}</span>
                 </h1>
                 {
                     nameFilter && <NameFilter />

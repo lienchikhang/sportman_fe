@@ -34,23 +34,9 @@ const Showcase = () => {
     }, []);
 
     const handleExplore = () => {
-        route.push("/home/products?page=1&pageSize=25&sort=asc")
+        route.push("/products?page=1&pageSize=25&sort=asc")
     }
 
-    if (loading) {
-        return <div className='showcase__wrapper'>
-            <div className='showcase__heading'>
-                <h1>NEW PRODUCTS</h1>
-                <p onClick={handleExplore}>Explore more</p>
-            </div>
-            <div className="showcase__products">
-                <Product product={null} notify={() => { }} />
-                <Product product={null} notify={() => { }} />
-                <Product product={null} notify={() => { }} />
-                <Product product={null} notify={() => { }} />
-            </div>
-        </div>
-    }
 
     if (hasError) {
         return <div className='showcase__wrapper'>
@@ -92,7 +78,7 @@ const Showcase = () => {
                 {
                     products && products.map((pro, idx) => {
                         return <SwiperSlide key={idx}>
-                            <Product product={pro} notify={() => { }} />
+                            <Product product={pro} />
                         </SwiperSlide>
                     })
                 }

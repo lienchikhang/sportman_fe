@@ -6,12 +6,13 @@ import '../libs/styles/filterPart.scss';
 import { Button, Error } from './ui';
 import http from '@/libs/configs/http';
 
-interface ISeason {
-    yearStart: number,
-    yearEnd: number,
+interface IClub {
+    clubName: string,
+    colorHex: string,
+    shortName: string
 }
 
-const SeasonFilter = () => {
+const ClubFilter = () => {
 
     const query = useSearchParams();
     const [curChoice, setCurChoice] = useState('');
@@ -19,15 +20,15 @@ const SeasonFilter = () => {
     const pathname = usePathname();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [seasons, setSeasons] = useState<ISeason[]>([]);
+    const [seasons, setSeasons] = useState<IClub[]>([]);
 
     //fetch data
     useEffect(() => {
         setLoading(true);
-        http.get("/seasons")
+        http.get("/clubs")
             .then((res) => {
                 if (res?.status != 200) { setError(true); return; }
-                setSeasons(res?.data?.content?.seasons);
+                setSeasons(res?.data?.content);
                 setLoading(false);
             })
             .catch((err) => { setError(true); setLoading(false); })
@@ -37,8 +38,8 @@ const SeasonFilter = () => {
     useEffect(() => {
         const params = new URLSearchParams(query as any);
 
-        if (params.has('season')) {
-            setCurChoice(`${params.get('season')}`)
+        if (params.has('club')) {
+            setCurChoice(`${params.get('club')}`)
         }
         else {
             setCurChoice('');
@@ -47,15 +48,15 @@ const SeasonFilter = () => {
 
     }, [query.toString()])
 
-    const handleChoice = (season: ISeason) => {
+    const handleChoice = (club: IClub) => {
         const params = new URLSearchParams(query as any);
 
-        if (curChoice == season.yearStart + "-" + season.yearEnd) {
-            params.delete('season');
+        if (curChoice == club.clubName.toLowerCase()) {
+            params.delete('club');
             setCurChoice("");
         } else {
-            setCurChoice(season.yearStart + "-" + season.yearEnd);
-            params.set("season", season.yearStart + "-" + season.yearEnd);
+            setCurChoice(club.clubName.toLowerCase());
+            params.set("club", club.clubName.toLowerCase());
         }
 
         router.push(`${pathname}?${params.toString()}`);
@@ -80,20 +81,18 @@ const SeasonFilter = () => {
 
 
     return (
-        <React.Fragment>
+        <>
             <div className='flex flex-wrap items-center gap-2 mb-4'>
                 {
-                    seasons && seasons.map((ss, idx) => {
-                        return <div className={`seasonItem ${curChoice == ss.yearStart + "-" + ss.yearEnd ? 'active' : ''}`} key={idx} onClick={() => handleChoice(ss)}>
-                            <span>{ss.yearStart}</span>
-                            <span>-</span>
-                            <span>{ss.yearEnd}</span>
+                    seasons && seasons.map((club, idx) => {
+                        return <div style={{ background: `${club.colorHex}` }} className={`seasonItem text-white ${curChoice == club.clubName.toLowerCase() ? 'active' : ''}`} key={idx} onClick={() => handleChoice(club)}>
+                            <span>{club.shortName.toUpperCase()}</span>
                         </div>
                     })
                 }
             </div>
-        </React.Fragment>
+        </>
     )
 }
 
-export default SeasonFilter
+export default ClubFilter;

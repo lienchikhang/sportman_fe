@@ -10,7 +10,13 @@ const convertProductText = (text: string): string => {
     return text.slice(0, 64) + "...";
 }
 
+const convertText = (text: string, length: number = 20) => {
+    if (text.length <= length) return text;
+    return text.slice(0, length) + "...";
+}
+
 export {
     convertCommentText,
     convertProductText,
+    convertText
 }

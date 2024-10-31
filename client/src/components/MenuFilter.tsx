@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 import '../libs/styles/menu.scss';
 import Divider from '@mui/material/Divider';
@@ -10,6 +9,8 @@ const MenuFilter = () => {
             <MenuItem type='Season' />
             <Divider />
             <MenuItem type='Size' />
+            <Divider />
+            <MenuItem type='Club' />
             <Divider />
             <MenuItem type='Price' />
         </div>

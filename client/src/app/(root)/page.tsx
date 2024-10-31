@@ -6,12 +6,12 @@ import Showcase from "@/components/Showcase";
 
 const HomePage = () => {
     return (
-        <div>
+        <>
             <Carousel />
             <ExploreProduct />
             <Showcase />
             <CommentShowcase />
-        </div>
+        </>
     )
 }
 
