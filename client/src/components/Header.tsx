@@ -15,7 +15,7 @@ const Header = () => {
     const handleScroll = () => {
         const currentScrollY = window.scrollY;
 
-        if (currentScrollY > lastScrollY) {
+        if (currentScrollY > lastScrollY && currentScrollY > 80) {
             // Cuộn xuống, ẩn header
             setIsHidden(true);
         } else {

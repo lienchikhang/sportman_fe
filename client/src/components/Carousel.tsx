@@ -2,36 +2,32 @@
 import { carouselList, subTitle, title } from '@/libs/constants/carousel'
 import React from 'react';
 import '../libs/styles/carousel.scss';
-import { Button } from './ui';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade, Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/navigation';
+import 'swiper/css/autoplay';
 
 const Carousel = () => {
     return (
         <div className='carousel__wrapper'>
-            <section className='carousel__top'>
-                <h1>{title.normal} <span>{title.special}</span></h1>
-                <p>{subTitle}</p>
-                <Button
-                    text='Join the sportman for free'
-                    primary
-                    callback={() => { console.log('test') }}
-                    style='relative z-10'
-                />
-                <button className='cta__btn'>Shop all products</button>
-                <div className='carousel__sub'>
-                    {
-                        carouselList.map((item, idx) => {
-                            return <div className='carousel__sub-item' key={idx}>
-                                <figure>
-                                    <img src={item.bg} alt="" />
-                                    <figcaption>
-                                        <p>{item.title}</p>
-                                    </figcaption>
-                                </figure>
-                            </div>
-                        })
-                    }
-                </div>
-            </section>
+            <Swiper
+                spaceBetween={50}
+                slidesPerView={1}
+                modules={[EffectFade, Navigation, Autoplay]}
+                autoplay={{ delay: 3800, }}
+                loop={true}
+                effect="fade"
+                navigation
+            >
+                {carouselList.map((carousel, idx) => <SwiperSlide key={idx}>
+                    <div className='carousel__item'>
+                        <img src={carousel.bg} alt="" />
+                        <p></p>
+                    </div>
+                </SwiperSlide>)}
+            </Swiper>
         </div>
     )
 }
