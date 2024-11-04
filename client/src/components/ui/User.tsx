@@ -1,8 +1,11 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AvatarCustom from './Avatar';
 import PersonIcon from '@mui/icons-material/Person';
 import { useUser } from '@/libs/contexts/user.context';
+import ModalAuth from '../ModalAuth';
+import { ModalAuthProvider, useModalAuth } from '@/libs/contexts/modal.auth.context';
+import ModalOpenButton from '../ModalOpenButton';
 
 
 const User = () => {
@@ -10,13 +13,13 @@ const User = () => {
     const [isHovered, setIsHovered] = useState(false);
     const { user, logout } = useUser();
 
-    const handleClick = () => {
-
-    }
 
     if (!user) {
-        return <div className='user__wrapper' onClick={handleClick}>
-            <PersonIcon />
+        return <div className='user__wrapper'>
+            <ModalAuthProvider>
+                <ModalAuth />
+                <ModalOpenButton />
+            </ModalAuthProvider>
         </div>
     }
 

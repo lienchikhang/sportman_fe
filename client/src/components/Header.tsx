@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import "../libs/styles/header.scss";
 import { Balance, Button, Cart, HeaderSub, Logo, User } from './ui';
-import SearchBar from './SearchBar';
 import HeaderNav from './HeaderNav';
 import SearchAction from './SearchAction';
 import { SearchProvider } from '@/libs/contexts/search.context';

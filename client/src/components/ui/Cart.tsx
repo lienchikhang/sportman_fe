@@ -26,7 +26,7 @@ const Cart = () => {
         http.get(`/carts`, true)
             .then((res) => {
                 console.log({ res });
-                setTotalItem(res?.data?.response?.content?.totalElement);
+                setTotalItem(res?.data?.content?.totalElements);
             })
             .catch((err) => {
                 setTotalItem(0);
