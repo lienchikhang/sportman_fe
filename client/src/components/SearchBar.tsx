@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import { container, item } from '@/libs/constants/component';
 import http from '@/libs/configs/http';
 import { Error, HightLightWord } from './ui';
+import SearchTurnOff from './SearchTurnOff';
 
 
 interface ISearchItem {
@@ -41,7 +42,7 @@ const SearchBar = () => {
 
         setTimeout(() => {
             setInputValue('')
-            router.push(`/home/products?page=1&pageSize=25&name=${endpoint}`);
+            router.push(`/products?page=1&pageSize=25&name=${endpoint}`);
         }, 300);
     }
 
@@ -128,6 +129,7 @@ const SearchBar = () => {
 
     return (
         <div className='search__wrapper'>
+            <SearchTurnOff />
             <div className="bar">
                 <div className='input'>
                     <input

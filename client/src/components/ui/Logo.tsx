@@ -1,6 +1,5 @@
 'use client';
 import React from 'react'
-import "../../libs/styles/ui/logo.scss";
 import { useRouter } from 'next/navigation';
 
 export const Logo = () => {
@@ -13,7 +12,7 @@ export const Logo = () => {
 
     return (
         <div className='logo' onClick={handleClick}>
-            <h1>SPORTMAN</h1>
+            <h1>SPORT <span>MAN</span></h1>
         </div>
     )
 }

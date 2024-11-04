@@ -4,8 +4,3 @@ export interface IUser {
     balance: number,
 }
 
-export interface IUserContextType {
-    user: IUser | null;
-    login: (userData: IUser) => void;
-    logout: () => void;
-}

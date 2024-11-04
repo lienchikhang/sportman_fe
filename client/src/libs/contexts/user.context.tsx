@@ -1,8 +1,9 @@
 'use client';
 import { createContext, useContext, useState, ReactNode, FC, useEffect } from 'react';
-import { IUser, IUserContextType } from '../interfaces/user.interface';
+import { IUser } from '../interfaces/user.interface';
 import http from '../configs/http';
 import { cookies } from 'next/headers';
+import { IUserContextType } from '../interfaces/context.interface';
 
 const UserContext = createContext<IUserContextType | undefined>(undefined);
 

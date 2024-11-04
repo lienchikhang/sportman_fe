@@ -31,3 +31,9 @@ body {
     text-wrap: balance;
   }
 } */
+
+:root {
+  --primaryBlue: #263ccd;
+  --primaryBlack: #231f20;
+  --secondGray: #3c3c3c;
+}

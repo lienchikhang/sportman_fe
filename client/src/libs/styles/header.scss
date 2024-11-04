@@ -1,18 +1,135 @@
 header {
 
-    .header__wrapper {
-        @apply w-[92%] mx-auto flex flex-col justify-between py-3;
-        // border-color: #635EF7;
+    @apply fixed top-0 left-0 w-full z-50 transition-all;
 
-        .header__top {
-            @apply flex items-start justify-between gap-5;
+    &.active {
+        transform: translateY(-100%);
+    }
 
-            .header__search {
-                @apply flex-1;
+    .header__nav {
+        @apply px-16 bg-white flex items-center justify-between;
+
+        .nav__list {
+
+            @apply flex;
+
+            .nav__item {
+                @apply block px-3 py-2 text-sm transition-all cursor-pointer font-medium;
+                color: #231f20;
+
+                &:hover {
+                    @apply bg-zinc-100;
+                }
             }
 
-            .header__nav {
-                @apply flex items-center gap-5;
+        }
+    }
+
+    .header__sub-nav {
+        @apply py-1;
+        background-color: #263ccd;
+
+        p {
+            @apply text-sm text-center text-white;
+
+            span {
+                @apply underline cursor-pointer;
+            }
+        }
+    }
+
+    .header__main {
+        @apply relative px-16 flex items-center justify-between;
+        background-color: var(--primaryBlack);
+
+        .main__search {
+            @apply fixed z-[100] top-0 left-0 w-full h-screen bg-black/80;
+
+            .search__section {
+                @apply px-20 py-12 bg-white;
+
+                .search__wrapper {
+                    @apply mx-auto w-1/3;
+                }
+            }
+
+            &.active {
+                @apply fixed;
+            }
+
+            &.unactive {
+                @apply hidden;
+            }
+        }
+
+        .logo {
+            @apply cursor-pointer;
+            // background-color: #e6e5ff;
+
+
+            h1 {
+                @apply text-2xl text-center font-bold uppercase text-wrap max-w-[100px];
+                color: white;
+
+                span {
+                    @apply bg-white text-black px-2 rounded-md;
+                }
+            }
+        }
+
+        .header__main-nav {
+            @apply flex items-center;
+
+            .main-nav-item {
+                @apply px-5 py-7 cursor-pointer transition-all;
+
+                p {
+                    @apply font-medium text-white;
+                }
+
+                &:hover {
+                    background-color: #3c3c3c;
+                }
+            }
+        }
+
+        .header__actions {
+            @apply flex items-center gap-2;
+
+            .bar {
+                @apply px-6 py-4 rounded-3xl;
+                background: #f5f5f5;
+
+                .input {
+                    @apply w-full flex gap-3 items-center justify-between;
+
+                    input {
+                        @apply outline-none bg-transparent flex-1;
+                        color: var(--primaryBlue);
+                    }
+                }
+            }
+
+            .cart__wrapper {
+                @apply p-4 flex justify-center items-center relative cursor-pointer;
+                // background-color: #f5f5f5;
+
+                svg {
+                    @apply text-white text-3xl;
+                }
+
+                span {
+                    @apply absolute -right-2 -top-1 text-center w-[25px] h-[25px] py-[3px] px-[6px] rounded-full text-[12px] text-white;
+                    background-color: #635EF7;
+                }
+            }
+
+            .user__wrapper {
+                @apply px-4 flex justify-center items-center cursor-pointer;
+
+                svg {
+                    @apply text-3xl text-white;
+                }
             }
         }
     }

@@ -6,6 +6,7 @@ import { IProduct } from '@/libs/interfaces/product.interface';
 import '../libs/styles/ui/product.scss';
 import { Box, Skeleton } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 interface Props {
     product: IProduct,
@@ -60,37 +61,39 @@ const Product: React.FC<Props> = ({ product, style, }) => {
 
     return (
         <div className={`product__wrapper ${style}`}>
-            <div className="product__top">
-                <div className="color__wrapper">
-                    {
-                        product.colors.map((color, idx: number) => {
-                            return <div key={idx} className='color__item' style={{ backgroundColor: color, borderColor: color }}></div>
-                        })
-                    }
+            <Link href={`/products/${product.id}`}>
+                <div className="product__top">
+                    <div className="color__wrapper">
+                        {
+                            product.colors.map((color, idx: number) => {
+                                return <div key={idx} className='color__item' style={{ backgroundColor: color, borderColor: color }}></div>
+                            })
+                        }
+                    </div>
+                    <div className="product__nav">
+                        <CallMadeIcon />
+                    </div>
                 </div>
-                <div className="product__nav">
-                    <CallMadeIcon />
+                <div className="product__image">
+                    <img className='image__front' src={product?.frontImage} alt="" />
+                    <img className='image__back' src={product?.backImage} alt="" />
                 </div>
-            </div>
-            <div className="product__image">
-                <img className='image__front' src={product?.frontImage} alt="" />
-                <img className='image__back' src={product?.backImage} alt="" />
-            </div>
-            <div className="product__info">
-                <h2 className='product__name'>{product?.productName.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</h2>
-                <div className='product__price'>
-                    {/* <span>{product?.productPrice.toLocaleString()}</span> */}
-                    <span>{new Intl.NumberFormat('en-US').format(product?.productPrice)}</span>
-                    <Button
-                        callback={() => console.log('product')}
-                        primary
-                        text={"+"}
-                        showNotice={() => { }}
-                        hasIntrospect
-                        onlyLoading
-                    />
+                <div className="product__info">
+                    <h2 className='product__name'>{product?.productName.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</h2>
+                    <div className='product__price'>
+                        {/* <span>{product?.productPrice.toLocaleString()}</span> */}
+                        <span>{new Intl.NumberFormat('en-US').format(product?.productPrice)}</span>
+                        <Button
+                            callback={() => console.log('product')}
+                            primary
+                            text={"+"}
+                            showNotice={() => { }}
+                            hasIntrospect
+                            onlyLoading
+                        />
+                    </div>
                 </div>
-            </div>
+            </Link>
         </div>
     )
 }
