@@ -15,7 +15,7 @@ const BundesligaShowcase = () => {
             <SwiperLeague
                 title='BUNDESLIGA'
                 type='BUNDESLIGA'
-                endpoint='/products?page=1&pageSize=25&sort=desc&league=BUNDESLIGA'
+                endpoint='/products?page=1&pageSize=10&sort=desc&league=BUNDESLIGA'
             />
         </div>
     )

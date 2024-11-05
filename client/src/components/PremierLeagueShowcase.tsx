@@ -15,7 +15,7 @@ const PremierLeagueShowcase = () => {
             <SwiperLeague
                 title='PREMIER LEAGUE'
                 type='premier'
-                endpoint='/products?page=1&pageSize=25&sort=desc&league=PREMIER'
+                endpoint='/products?page=1&pageSize=10&sort=desc&league=PREMIER'
             />
         </div>
     )

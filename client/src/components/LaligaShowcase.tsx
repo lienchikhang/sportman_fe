@@ -15,7 +15,7 @@ const LaligaShowcase = () => {
             <SwiperLeague
                 title='LALIGA'
                 type='LALIGA'
-                endpoint='/products?page=1&pageSize=25&sort=desc&league=LALIGA'
+                endpoint='/products?page=1&pageSize=10&sort=desc&league=LALIGA'
             />
         </div>
     )

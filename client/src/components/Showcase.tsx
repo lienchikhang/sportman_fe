@@ -23,7 +23,7 @@ const Showcase = () => {
 
     useEffect(() => {
 
-        http.get("/products?sort=asc&pageSize=10")
+        http.get("/products?sort=desc&pageSize=10")
             .then((res) => {
                 if (res?.status != 200) { setError(true); return; }
                 setProducts(res?.data?.content?.products);

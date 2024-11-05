@@ -6,6 +6,7 @@ import Showcase from "@/components/Showcase";
 import PremierLeagueShowcase from '@/components/PremierLeagueShowcase';
 import BundesligaShowcase from '@/components/BundesligaLeagueShowcase';
 import LaligaShowcase from '@/components/LaligaShowcase';
+import PlayersSide from '@/components/PlayersSide';
 
 const HomePage = () => {
     return (
@@ -15,6 +16,7 @@ const HomePage = () => {
             <PremierLeagueShowcase />
             <LaligaShowcase />
             <BundesligaShowcase />
+            <PlayersSide />
             <CommentShowcase />
         </>
     )
