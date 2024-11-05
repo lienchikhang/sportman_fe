@@ -3,7 +3,11 @@ import { Chip } from '@mui/material';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
-const AppliedFilters = () => {
+interface Props {
+    totalResult: number,
+}
+
+const AppliedFilters: React.FC<Props> = ({ totalResult }) => {
 
     const params = useSearchParams();
     const [filters, setFilters] = useState<string[]>([]);
@@ -20,12 +24,12 @@ const AppliedFilters = () => {
         if (key == 'sort') return;
         const params = new URLSearchParams(query as any);
         params.delete(key);
-        route.push(`${pathname}?${params.toString()}`);
+        route.push(`${pathname}?${params.toString()}#att`);
     };
 
     return (
         <div className='mt-4 flex items-center gap-2'>
-            <p className='text-zinc-500 font-medium'>Applied filters:</p>
+            <p className='font-semibold'>{`${totalResult} results: `}</p>
             {
                 filters.map((filter, idx) => {
                     return <Chip

@@ -88,7 +88,7 @@ const SizeFilter = () => {
             params.set("size", choices.join('-'));
         }
 
-        router.push(`${pathname}?${params.toString()}`);
+        router.push(`${pathname}?${params.toString()}#att`);
 
 
     }

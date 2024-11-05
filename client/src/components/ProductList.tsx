@@ -17,7 +17,7 @@ const ProductList: React.FC<Props> = ({ data }) => {
             <div className='productList__wrapper'>
                 {
                     products.length ? products.map((product, idx) => {
-                        return <Product product={product} style='col-span-4 w-full' key={idx} />
+                        return <Product product={product} style='col-span-3 w-full' key={idx} />
                     }) : <div>Oop! There's no product that match your find</div>
                 }
             </div>

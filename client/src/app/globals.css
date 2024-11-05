@@ -32,6 +32,12 @@ body {
   }
 } */
 
+img,
+video {
+  height: unset;
+  max-width: unset;
+}
+
 :root {
   --primaryBlue: #263ccd;
   --primaryBlack: #231f20;

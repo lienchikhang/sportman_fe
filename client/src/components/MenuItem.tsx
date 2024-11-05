@@ -19,23 +19,33 @@ const MenuItem: React.FC<Props> = ({ type }) => {
         setOpen(!open);
     };
 
+    // return (
+    //     <Accordion expanded={open} onChange={handleAccordionChange}>
+    //         <AccordionSummary
+    //             expandIcon={<ExpandMoreIcon />}
+    //             aria-controls="panel1-content"
+    //             id="panel1-header"
+    //             className={`${open && 'active'} `}
+    //         >
+    //             {type}
+    //         </AccordionSummary>
+    //         <AccordionDetails>
+    //             {type == 'Season' && <SeasonFilter />}
+    //             {type == 'Size' && <SizeFilter />}
+    //             {type == 'Price' && <PriceFilter />}
+    //             {type == 'Club' && <ClubFilter />}
+    //         </AccordionDetails>
+    //     </Accordion>
+    // )
+
     return (
-        <Accordion expanded={open} onChange={handleAccordionChange}>
-            <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1-content"
-                id="panel1-header"
-                className={`${open && 'active'} `}
-            >
-                {type}
-            </AccordionSummary>
-            <AccordionDetails>
-                {type == 'Season' && <SeasonFilter />}
-                {type == 'Size' && <SizeFilter />}
-                {type == 'Price' && <PriceFilter />}
-                {type == 'Club' && <ClubFilter />}
-            </AccordionDetails>
-        </Accordion>
+        <div className='menuItem__wrapper'>
+            <h2 className='menuItem__title'>{type}</h2>
+            {type == 'Season' && <SeasonFilter />}
+            {type == 'Size' && <SizeFilter />}
+            {type == 'Price' && <PriceFilter />}
+            {type == 'Club' && <ClubFilter />}
+        </div>
     )
 }
 

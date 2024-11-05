@@ -58,7 +58,7 @@ const SeasonFilter = () => {
             params.set("season", season.yearStart + "-" + season.yearEnd);
         }
 
-        router.push(`${pathname}?${params.toString()}`);
+        router.push(`${pathname}?${params.toString()}#att`);
     }
 
     if (error) {
@@ -68,12 +68,12 @@ const SeasonFilter = () => {
     if (loading) {
         return <>
             <div className='flex flex-wrap items-center gap-2 mb-4'>
-                <Skeleton variant="rounded" width={135} height={36} />
-                <Skeleton variant="rounded" width={135} height={36} />
-                <Skeleton variant="rounded" width={135} height={36} />
-                <Skeleton variant="rounded" width={135} height={36} />
-                <Skeleton variant="rounded" width={135} height={36} />
-                <Skeleton variant="rounded" width={135} height={36} />
+                <Skeleton variant="rounded" width={120} height={36} />
+                <Skeleton variant="rounded" width={120} height={36} />
+                <Skeleton variant="rounded" width={120} height={36} />
+                <Skeleton variant="rounded" width={120} height={36} />
+                <Skeleton variant="rounded" width={120} height={36} />
+                <Skeleton variant="rounded" width={120} height={36} />
             </div>
         </>
     }

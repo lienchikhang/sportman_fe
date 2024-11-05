@@ -36,7 +36,7 @@ const PriceFilter = () => {
             params.delete(key);
         }
 
-        setFilter(`${pathname}?${params.toString()}` as string);
+        setFilter(`${pathname}?${params.toString()}#att` as string);
     }
 
     const handleChangeSelect = (e: React.ChangeEvent<HTMLInputElement>) => {

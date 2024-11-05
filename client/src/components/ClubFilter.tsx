@@ -25,7 +25,7 @@ const ClubFilter = () => {
     //fetch data
     useEffect(() => {
         setLoading(true);
-        http.get("/clubs")
+        http.get("/clubs?pageSize=10")
             .then((res) => {
                 if (res?.status != 200) { setError(true); return; }
                 setSeasons(res?.data?.content);
@@ -59,7 +59,7 @@ const ClubFilter = () => {
             params.set("club", club.clubName.toLowerCase());
         }
 
-        router.push(`${pathname}?${params.toString()}`);
+        router.push(`${pathname}?${params.toString()}#att`);
     }
 
     if (error) {
@@ -85,7 +85,7 @@ const ClubFilter = () => {
             <div className='flex flex-wrap items-center gap-2 mb-4'>
                 {
                     seasons && seasons.map((club, idx) => {
-                        return <div style={{ background: `${club.colorHex}` }} className={`seasonItem text-white ${curChoice == club.clubName.toLowerCase() ? 'active' : ''}`} key={idx} onClick={() => handleChoice(club)}>
+                        return <div className={`seasonItem text-zinc-500 ${curChoice == club.clubName.toLowerCase() ? 'active' : ''}`} key={idx} onClick={() => handleChoice(club)}>
                             <span>{club.shortName.toUpperCase()}</span>
                         </div>
                     })
@@ -94,5 +94,5 @@ const ClubFilter = () => {
         </>
     )
 }
-
+//style={{ background: `${club.colorHex}` }}
 export default ClubFilter;

@@ -16,7 +16,7 @@ interface Props {
     type?: any,
     timer?: number,
     showNotice: (mess: string, isSuccess: boolean) => void,
-    callback: () => void;
+    callback: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 const Button: React.FC<Props> = ({
@@ -37,8 +37,8 @@ const Button: React.FC<Props> = ({
     const { logout } = useUser();
     const router = useRouter();
 
-    const handleClick = () => {
-
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
         if (isLoading) return;
         setLoading(true);
 

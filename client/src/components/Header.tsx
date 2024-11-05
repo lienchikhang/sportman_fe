@@ -6,11 +6,13 @@ import HeaderNav from './HeaderNav';
 import SearchAction from './SearchAction';
 import { SearchProvider } from '@/libs/contexts/search.context';
 import SearchCompound from './SearchCompound';
+import { usePathname, useRouter } from 'next/navigation';
 
 const Header = () => {
 
     const [isHidden, setIsHidden] = useState(false);
-    const [lastScrollY, setLastScrollY] = useState(window.scrollY);
+    const [lastScrollY, setLastScrollY] = useState(0);
+    const pathname = usePathname();
 
     const handleScroll = () => {
         const currentScrollY = window.scrollY;
@@ -33,6 +35,18 @@ const Header = () => {
         // Dọn dẹp sự kiện khi component bị huỷ
         return () => window.removeEventListener('scroll', handleScroll);
     }, [lastScrollY]);
+
+    useEffect(() => {
+        // Kiểm tra hash mỗi khi URL thay đổi
+        const hash = window.location.hash;
+        if (hash) {
+            const section = document.querySelector(hash);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+                setIsHidden(false); // Hiển thị header nếu có hash
+            }
+        }
+    }, [window.location.hash]);
 
 
     return (

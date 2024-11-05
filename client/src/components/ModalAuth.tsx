@@ -10,7 +10,7 @@ const ModalAuth = () => {
 
     //local states
     const [isHidden, setIsHidden] = useState(false);
-    const [lastScrollY, setLastScrollY] = useState(window.scrollY);
+    const [lastScrollY, setLastScrollY] = useState(0);
     const [state, setState] = useState('login');
 
     //context state

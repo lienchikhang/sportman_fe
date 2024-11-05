@@ -78,22 +78,22 @@ const Product: React.FC<Props> = ({ product, style, }) => {
                     <img className='image__front' src={product?.frontImage} alt="" />
                     <img className='image__back' src={product?.backImage} alt="" />
                 </div>
-                <div className="product__info">
-                    <h2 className='product__name'>{product?.productName.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</h2>
-                    <div className='product__price'>
-                        {/* <span>{product?.productPrice.toLocaleString()}</span> */}
-                        <span>{new Intl.NumberFormat('en-US').format(product?.productPrice)}</span>
-                        <Button
-                            callback={() => console.log('product')}
-                            primary
-                            text={"+"}
-                            showNotice={() => { }}
-                            hasIntrospect
-                            onlyLoading
-                        />
-                    </div>
-                </div>
             </Link>
+            <div className="product__info">
+                <h2 className='product__name'>{product?.productName.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</h2>
+                <div className='product__price'>
+                    {/* <span>{product?.productPrice.toLocaleString()}</span> */}
+                    <span>{new Intl.NumberFormat('en-US').format(product?.productPrice)}</span>
+                    <Button
+                        callback={(event) => { event?.stopPropagation(); console.log('product'); }}
+                        primary
+                        text={"+"}
+                        showNotice={() => { }}
+                        hasIntrospect
+                        onlyLoading
+                    />
+                </div>
+            </div>
         </div>
     )
 }
