@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import '../libs/styles/commentShowcase.scss';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import { Error } from './ui';
 import Comment from './Comment';
 import 'swiper/css';
@@ -44,13 +44,13 @@ const CommentShowcase = () => {
             <div className='commentShowcase__wrapper'>
                 <h1 className='commentShowcase__title'>WHAT OUR REVIEWS SAY</h1>
                 <Swiper
-                    slidesPerView={totalComment}
+                    slidesPerView={5}
                     autoFocus
                     autoplay
-                    spaceBetween={40}
+                    spaceBetween={100}
                     pagination={true}
                     navigation={true}
-                    modules={[Pagination, Navigation]}
+                    modules={[Navigation]}
                 >
                     <SwiperSlide>
                         <Comment data={null} />
@@ -80,13 +80,10 @@ const CommentShowcase = () => {
             <div className='commentShowcase__wrapper'>
                 <h1 className='commentShowcase__title'>WHAT OUR REVIEWS SAY</h1>
                 <Swiper
-                    slidesPerView={totalComment}
-                    spaceBetween={30}
-                    pagination={{
-                        clickable: true,
-                    }}
+                    slidesPerView={4}
+                    spaceBetween={100}
                     navigation={true}
-                    modules={[Pagination, Navigation]}
+                    modules={[Navigation]}
                 >
                     {
                         comments && comments.map((cmt, idx) => {

@@ -1,11 +1,11 @@
 .showcase__wrapper {
-    @apply pb-24 w-[92%] mx-auto;
+    @apply relative overflow-visible p-16;
 
     .showcase__heading {
-        @apply flex justify-between items-center mb-12;
+        @apply flex justify-between items-center mb-6;
 
         h1 {
-            @apply font-semibold text-5xl;
+            @apply font-semibold text-4xl;
         }
 
         p {
@@ -41,28 +41,42 @@
             }
         }
     }
-}
 
-.swiper.swiper-initialized.swiper-horizontal {
-    @apply pb-16;
-}
+    // .swiper.swiper-initialized.swiper-horizontal.swiper-backface-hidden {
+    //     overflow: visible;
+    // }
 
-.swiper-button-next {
-    @apply p-8 rounded-full;
-    background-color: #f02878;
+    .swiper-button-next {
+        @apply p-8 rounded-full;
+        background-color: var(--primaryBlack);
+        // right: -50px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
 
-    &::after {
-        @apply text-white text-sm;
-        font-size: 20px;
+        &::after {
+            @apply text-white text-sm;
+            font-size: 20px;
+        }
+    }
+
+    .swiper-button-prev {
+        @apply p-8 rounded-full;
+        background-color: var(--primaryBlack);
+        // right: -50px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+
+        &::after {
+            @apply text-white text-sm;
+            font-size: 20px;
+        }
     }
 }
 
-.swiper-button-prev {
-    @apply p-8 rounded-full -left-14;
-    background-color: #f02878;
-
-    &::after {
-        @apply text-white text-sm left-10;
-        font-size: 20px;
-    }
-}
+// .swiper.swiper-initialized.swiper-horizontal {
+//     @apply pb-16;
+// }

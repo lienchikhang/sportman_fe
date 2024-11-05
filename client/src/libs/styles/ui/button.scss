@@ -1,15 +1,10 @@
 button.button {
-    @apply px-8 py-2 text-base font-medium border-2 rounded-full transition-all cursor-pointer;
-
-
-    // .MuiCircularProgress-root.MuiCircularProgress-indeterminate.MuiCircularProgress-colorPrimary.css-18lrjg1-MuiCircularProgress-root {
-    //     @apply w-[30px] h-[30px];
-    // }
+    @apply px-8 py-2 text-center text-base font-medium border-2 rounded-full transition-all cursor-pointer;
 
 
     &.primary {
-        border-color: #635EF7;
-        background-color: #635EF7;
+        border-color: var(--primaryBlue);
+        background-color: var(--primaryBlue);
         @apply text-white;
 
         svg {
@@ -21,13 +16,13 @@ button.button {
 
 
     &.secondary {
-        border-color: #635EF7;
-        color: #635EF7;
+        border-color: var(--primaryBlue);
+        color: var(--primaryBlue);
         @apply bg-transparent;
 
         svg {
             // @apply w-[20px] h-[20px];
-            color: #635EF7;
+            color: var(--primaryBlue);
 
         }
     }
@@ -39,7 +34,7 @@ button.button {
         }
 
         &.secondary {
-            background-color: #635EF7;
+            background-color: var(--primaryBlue);
             @apply text-white;
 
 

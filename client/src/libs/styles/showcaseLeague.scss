@@ -1,0 +1,83 @@
+.league__wrapper {
+
+
+    .showcase__carousel {
+        @apply w-full h-[470px] grid grid-cols-12;
+        background-color: var(--primaryGray);
+
+        .carousel__content {
+            @apply col-span-4 p-16 flex flex-col justify-center;
+
+            .carousel__icon {
+                @apply object-cover w-[200px] h-[200px] mb-3;
+            }
+
+            h1 {
+                @apply text-4xl font-semibold mb-1;
+            }
+
+            p {
+                @apply text-lg mb-5;
+            }
+
+        }
+
+        .carousel__image {
+            @apply col-span-8 h-full;
+
+            img {
+                @apply block ml-auto w-[800px] h-full object-cover;
+            }
+        }
+    }
+
+    .swiperLeague__wrapper {
+        @apply p-16;
+
+        .showcase__heading {
+            @apply flex justify-between items-center mb-5;
+
+            h1 {
+                @apply text-3xl font-semibold;
+            }
+
+            p {
+                @apply text-2xl font-medium transition-all cursor-pointer;
+
+                &:hover {
+                    color: var(--primaryBlue);
+                }
+            }
+        }
+
+        .swiper-button-next {
+            @apply p-8 rounded-full;
+            background-color: var(--primaryBlack);
+            // right: -50px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+
+            &::after {
+                @apply text-white text-sm;
+                font-size: 20px;
+            }
+        }
+
+        .swiper-button-prev {
+            @apply p-8 rounded-full;
+            background-color: var(--primaryBlack);
+            // right: -50px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+
+            &::after {
+                @apply text-white text-sm;
+                font-size: 20px;
+            }
+        }
+    }
+}

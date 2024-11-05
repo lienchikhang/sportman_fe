@@ -35,7 +35,7 @@ export const UserProvider: FC<UserProviderProps> = ({ children }) => {
 
         http.post(`/auth/logout`, {
             token: cookie?.token,
-        })
+        }, false)
             .then((res) => {
                 if (res?.status == 200) {
 

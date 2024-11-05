@@ -6,12 +6,18 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import XIcon from "@mui/icons-material/X";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import LocationOnIcon from '@mui/icons-material/LocationOn';
 
 
 const Footer = () => {
     return (
         <footer>
+            <div className="footer__marketing">
+                <h2>Join SPORTCLUB - Receive a 15% voucher and refund money when go shopping </h2>
+                <div className="marketing-group">
+                    <button>Join Free</button>
+                    <button>Explore membership</button>
+                </div>
+            </div>
             <div className="footer__wrapper">
                 <div className="footer__responsive">
                     {footer.map((footer, idx) => {

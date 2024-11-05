@@ -67,13 +67,10 @@ const Showcase = () => {
                 <p onClick={handleExplore}>Explore more</p>
             </div>
             <Swiper
-                slidesPerView={4}
-                spaceBetween={30}
-                pagination={{
-                    clickable: true,
-                }}
-                navigation={true}
-                modules={[Pagination, Navigation]}
+                slidesPerView={5}
+                spaceBetween={100}
+                navigation
+                modules={[Navigation]}
             >
                 {
                     products && products.map((pro, idx) => {

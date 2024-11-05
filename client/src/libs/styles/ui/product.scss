@@ -1,6 +1,6 @@
 .product__wrapper {
-    @apply w-1/2 flex flex-col justify-center gap-3 rounded-3xl p-6 min-w-[304.75px];
-    background-color: #f8f8ff;
+    @apply w-1/2 flex flex-col justify-center gap-3 rounded-3xl p-4 min-w-[280px];
+    background-color: var(--primaryGray);
 
     .product__top {
         @apply flex justify-between items-center;
@@ -29,7 +29,7 @@
     }
 
     .product__image {
-        @apply w-full h-[320px] overflow-hidden transition-all relative;
+        @apply w-full h-[254px] overflow-hidden transition-all relative mb-4;
         transform-origin: center center;
         // transition: all .8 linear;
 

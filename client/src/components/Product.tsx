@@ -28,7 +28,7 @@ const Product: React.FC<Props> = ({ product, style, }) => {
         }, 700);
     }, [searchParams.toString()]);
 
-    if (isLoading) return <div className={`product__wrapper ${style}`}>
+    if (isLoading || !product) return <div className={`product__wrapper ${style}`}>
         <div className="product__top">
             <div className="color__wrapper">
                 <div className='color__item' style={{ backgroundColor: '#c3c3c3', borderColor: '#c3c3c3' }}></div>
@@ -38,7 +38,7 @@ const Product: React.FC<Props> = ({ product, style, }) => {
                 <CallMadeIcon />
             </div>
         </div>
-        <Skeleton animation="wave" height={320} />
+        <Skeleton animation="wave" height={254} />
         <div className="product__info">
             <Box>
                 <Skeleton animation="wave" />
@@ -61,7 +61,7 @@ const Product: React.FC<Props> = ({ product, style, }) => {
 
     return (
         <div className={`product__wrapper ${style}`}>
-            <Link href={`/products/${product.id}`}>
+            <Link href={`/products/${product?.id}`}>
                 <div className="product__top">
                     <div className="color__wrapper">
                         {

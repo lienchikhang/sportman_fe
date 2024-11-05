@@ -1,6 +1,6 @@
 .commentShowcase__background {
 
-    background-color: #9b99fb;
+    background-color: var(--primaryBlack);
 
     .commentShowcase__wrapper {
         @apply w-[92%] mx-auto py-24;
