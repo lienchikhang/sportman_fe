@@ -4,6 +4,7 @@ import { Button } from './ui';
 import { Drawer } from '@mui/material';
 import http from '@/libs/configs/http';
 import { useRouter } from 'next/navigation';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 
 interface Props {
     data: {
@@ -99,19 +100,10 @@ const ProductDetailOrder: React.FC<Props> = ({ data }) => {
                     }
                 </div>
             </div>
-            <Button
-                callback={() => toggleDrawer(true)}
-                primary
-                showNotice={() => { }}
-                text='Buy now'
-            />
-            <button onClick={toggleDrawer(true)}>adw</button>
-            <Button
-                callback={() => { }}
-                primary={false}
-                showNotice={() => { }}
-                text='Add to cart'
-            />
+            <button className='btn-add-to-cart' onClick={toggleDrawer(true)}>
+                <ShoppingBasketIcon />
+                <span>Add to cart</span>
+            </button>
         </>
     )
 }

@@ -20,7 +20,6 @@ const ShowcaseCarousel: React.FC<Props> = ({ league, bio, img, icon }) => {
                     callback={() => { }}
                     primary
                     text='Explore now'
-                    showNotice={() => { }}
                 />
             </div>
             <div className="carousel__image">

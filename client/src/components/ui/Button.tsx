@@ -5,6 +5,8 @@ import { CircularProgress } from '@mui/material';
 import http from '@/libs/configs/http';
 import { useUser } from '@/libs/contexts/user.context';
 import { useRouter } from 'next/navigation';
+import notificationEmitter from '../../libs/configs/eventDriven';
+
 
 interface Props {
     text: string,
@@ -15,7 +17,6 @@ interface Props {
     onlyLoading?: boolean,
     type?: any,
     timer?: number,
-    showNotice: (mess: string, isSuccess: boolean) => void,
     callback: (e?: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -28,7 +29,6 @@ const Button: React.FC<Props> = ({
     onlyLoading = false,
     type = "button",
     timer = 1800,
-    showNotice,
     callback
 }) => {
 
@@ -48,6 +48,7 @@ const Button: React.FC<Props> = ({
                 .then((res) => {
                     setTimeout(() => {
                         callback();
+                        notificationEmitter.emit('success', 'Add to cart successfully!')
                         setLoading(false);
                     }, timer)
                 })
@@ -57,15 +58,15 @@ const Button: React.FC<Props> = ({
 
                     if (err?.response?.status == 400) {
                         setTimeout(() => {
-                            showNotice('Please login!', false);
                             setLoading(false);
+                            notificationEmitter.emit('error', 'Please Login!')
                         }, timer)
                     }
 
                     if (err?.response?.status == 401 && err?.response?.data?.msg == 'LoginExpired') {
                         setTimeout(() => {
-                            showNotice('Login Expired', false);
                             setLoading(false);
+                            notificationEmitter.emit('error', 'Login Expired!')
                             logout();
                             router.refresh();
                         }, timer)
@@ -74,26 +75,29 @@ const Button: React.FC<Props> = ({
         } else {
             setTimeout(() => {
                 callback();
+                notificationEmitter.emit('success', 'Add to cart successfully!')
                 setLoading(false);
             }, timer)
         }
     }
 
     return (
-        <button
-            type={type}
-            className={`
+        <>
+            <button
+                type={type}
+                className={`
                 button ${style ? style : ''}
                 ${primary ? 'primary' : 'secondary'} 
                 ${disable || isLoading ? "disabled" : ""}`
-            }
-            disabled={disable}
-            onClick={handleClick}
-        >
-            {isLoading ? <div className={`flex items-center ${onlyLoading ? 'justify-center' : 'gap-1'}`}>
-                {onlyLoading ? <CircularProgress style={{ width: '19px', height: '19px' }} /> : <span>Loading...</span>}
-            </div> : text}
-        </button>
+                }
+                disabled={disable}
+                onClick={handleClick}
+            >
+                {isLoading ? <div className={`flex items-center ${onlyLoading ? 'justify-center' : 'gap-1'}`}>
+                    {onlyLoading ? <CircularProgress style={{ width: '19px', height: '19px' }} /> : <span>Loading...</span>}
+                </div> : text}
+            </button>
+        </>
     )
 }
 

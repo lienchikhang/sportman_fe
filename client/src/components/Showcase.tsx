@@ -50,7 +50,6 @@ const Showcase = () => {
                         <h2 className='error__heading'>Something is wrong! Please try again.</h2>
                         <Button
                             callback={() => window.location.reload()}
-                            showNotice={() => { }}
                             primary
                             text='Reload'
                         />

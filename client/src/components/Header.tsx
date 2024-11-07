@@ -14,6 +14,8 @@ const Header = () => {
     const [lastScrollY, setLastScrollY] = useState(0);
     const pathname = usePathname();
 
+    console.log({ pathname });
+
     const handleScroll = () => {
         const currentScrollY = window.scrollY;
 
@@ -21,32 +23,44 @@ const Header = () => {
             // Cuộn xuống, ẩn header
             setIsHidden(true);
         } else {
-            // Cuộn lên, hiện header
-            setIsHidden(false);
+            if (pathname.includes('products') && currentScrollY > 800) {
+                setIsHidden(true);
+            } else {
+                // Cuộn lên, hiện header
+                setIsHidden(false);
+            }
+
         }
 
         setLastScrollY(currentScrollY);
     };
 
+    //add onScroll event
     useEffect(() => {
-        // Gắn sự kiện scroll
         window.addEventListener('scroll', handleScroll);
-
-        // Dọn dẹp sự kiện khi component bị huỷ
         return () => window.removeEventListener('scroll', handleScroll);
     }, [lastScrollY]);
 
+    //check url change
     useEffect(() => {
         // Kiểm tra hash mỗi khi URL thay đổi
         const hash = window.location.hash;
-        if (hash) {
-            const section = document.querySelector(hash);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-                setIsHidden(false); // Hiển thị header nếu có hash
+        if (typeof window !== 'undefined') {
+            // Gắn sự kiện scroll
+            window.addEventListener('scroll', handleScroll);
+
+            // Xử lý khi có hash trong URL
+            if (window.location.hash) {
+                const element = document.querySelector(window.location.hash);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    setIsHidden(false);
+                }
             }
+
+            return () => window.removeEventListener('scroll', handleScroll);
         }
-    }, [window.location.hash]);
+    }, []);
 
 
     return (

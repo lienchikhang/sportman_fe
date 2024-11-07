@@ -8,10 +8,10 @@ import { Box, Skeleton } from '@mui/material';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
+
 interface Props {
     product: IProduct,
     style?: string,
-    // notify: (mess: string, isSuccess: boolean) => void,
 }
 
 const Product: React.FC<Props> = ({ product, style, }) => {
@@ -51,7 +51,6 @@ const Product: React.FC<Props> = ({ product, style, }) => {
                 <Button
                     callback={() => { }}
                     primary
-                    showNotice={() => { }}
                     disable
                     text={"+"}
                 />
@@ -88,7 +87,6 @@ const Product: React.FC<Props> = ({ product, style, }) => {
                         callback={(event) => { event?.stopPropagation(); console.log('product'); }}
                         primary
                         text={"+"}
-                        showNotice={() => { }}
                         hasIntrospect
                         onlyLoading
                     />

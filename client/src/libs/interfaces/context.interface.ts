@@ -16,3 +16,12 @@ export interface IModalAuthContextType {
     handleToggle: (value: boolean) => void;
 }
 
+export interface INotificationContextType {
+    toggle: boolean,
+    msg: string,
+    type: string,
+    handleTurnOff: () => void;
+    handleTurnOn: (msg: string, type: string) => void;
+}
+
+
