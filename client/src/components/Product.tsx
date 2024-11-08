@@ -19,6 +19,7 @@ const Product: React.FC<Props> = ({ product, style, }) => {
     const [isLoading, setIsLoading] = useState(true);
     const searchParams = useSearchParams();
 
+    //set loading
     useEffect(() => {
         if (!isLoading) {
             setIsLoading(true);

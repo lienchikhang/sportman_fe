@@ -23,9 +23,6 @@ const ProductDetailImage: React.FC<Props> = ({ frontImage, backImage }) => {
         setForward(false);
     };
 
-    console.log({ forward, backward })
-
-
     return (
         <>
             <div className={`image-container ${forward ? 'forward' : ''} ${backward ? 'backward' : ''}`}>

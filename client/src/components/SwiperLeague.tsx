@@ -23,7 +23,6 @@ const SwiperLeague: React.FC<Props> = ({ title, type, endpoint }) => {
     useEffect(() => {
         http.get(endpoint)
             .then((res) => {
-                console.log('res', res);
                 setProducts(res?.data?.content?.products);
             })
             .catch((err) => {

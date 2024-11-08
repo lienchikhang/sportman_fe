@@ -1,4 +1,5 @@
-import React from 'react'
+'use client';
+import React, { useEffect } from 'react'
 import ProductDetailOrder from './ProductDetailOrder';
 import RestoreIcon from '@mui/icons-material/Restore';
 import CallIcon from '@mui/icons-material/Call';
@@ -8,12 +9,15 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { Accordion, AccordionDetails, AccordionSummary, Divider } from '@mui/material';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { IProduct } from '@/libs/interfaces/product.interface';
 interface Props {
     data: {
         id: string,
         productName: string,
         productPrice: number,
         colors: any[],
+        frontImage: string,
+        backImage: string,
         stocks: {
             sizeTag: string,
             stocks: number,
@@ -25,6 +29,26 @@ interface Props {
 const ProductDetailInfo: React.FC<Props> = ({ data }) => {
 
     const { id, productName, productPrice, colors, stocks, seasons } = data;
+
+    //save product into localStorage (product which has watched)
+    useEffect(() => {
+        if (data) {
+            const storage = localStorage.getItem("products::storage");
+            if (!storage) {
+                const products: IProduct[] = [];
+                products.push({ ...data });
+                localStorage.setItem("products::storage", JSON.stringify(products));
+            } else {
+                const products: IProduct[] = JSON.parse(storage);
+                const idx = products.findIndex(pro => pro.id == id);
+                console.log({ idx });
+                if (idx != -1) return;
+                products.push({ ...data });
+                localStorage.setItem("products::storage", JSON.stringify(products));
+            }
+        }
+    }, []);
+
 
     return (
         <>

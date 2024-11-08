@@ -14,8 +14,6 @@ const Header = () => {
     const [lastScrollY, setLastScrollY] = useState(0);
     const pathname = usePathname();
 
-    console.log({ pathname });
-
     const handleScroll = () => {
         const currentScrollY = window.scrollY;
 

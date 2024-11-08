@@ -6,4 +6,5 @@ export interface IComment {
     },
     rateComment: string,
     createdAt: string,
+    rateStar: number,
 }

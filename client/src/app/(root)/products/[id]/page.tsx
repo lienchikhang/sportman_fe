@@ -1,16 +1,21 @@
 import ProductDetailInfo from '@/components/ProductDetailInfo';
 import React, { CSSProperties } from 'react';
 import '../../../../libs/styles/productDetail.scss';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { notFound } from 'next/navigation';
 import ProductDetailImage from '@/components/ProductDetailImage';
 import HeaderProductDetail from '@/components/HeaderProductDetail';
 import ProductListSuggestion from '@/components/ProductListSuggestion';
+import ProductComments from '@/components/ProductComments';
+import ProductsWatched from '@/components/ProductsWatched';
 
 
-const ProductDetailPage = async ({ params }: { params: { id: string } }) => {
+const ProductDetailPage = async ({ params, searchParams }: { params: { id: string }, searchParams: { [key: string]: string } }) => {
 
     const { id } = params;
+    const { page, pageSize, rate } = searchParams;
+
+    //query comment
+    const query = `http://localhost:8080/sportman/rates/${id}?page=${page ? page : 1}&pageSize=${pageSize ? pageSize : 6}${rate ? `&rate=${rate}` : ''}`;
 
     //fetch data
     const data = await fetch(`http://localhost:8080/sportman/products/get-by-id/${id}`, {
@@ -23,12 +28,9 @@ const ProductDetailPage = async ({ params }: { params: { id: string } }) => {
     }).then((res) => res.json());
 
     //fetch comments
-    // const comments = await fetch(`http://localhost:8080/sportman/products/get-by-id/${id}`, {
-    //     method: 'GET',
-    // }).then((res) => res.json());
-
-    console.log({ data });
-    console.log({ recommendProducts })
+    const comments = await fetch(query, {
+        method: 'GET',
+    }).then((res) => res.json());
 
     const { frontImage, backImage, ...rest } = data?.content;
 
@@ -36,7 +38,9 @@ const ProductDetailPage = async ({ params }: { params: { id: string } }) => {
         '--background-rotate': `url(${backImage})`
     };
 
-    if (!data || !recommendProducts) return notFound();
+    console.log({ comments });
+
+    if (!data || !recommendProducts || !comments) return notFound();
 
     return (
         <>
@@ -66,7 +70,7 @@ const ProductDetailPage = async ({ params }: { params: { id: string } }) => {
                         </div>
                     </div>
                     <div className="productDetail__info">
-                        <ProductDetailInfo data={rest} />
+                        <ProductDetailInfo data={data?.content} />
                     </div>
                 </div>
                 <div className="productDetail__detail">
@@ -94,10 +98,11 @@ const ProductDetailPage = async ({ params }: { params: { id: string } }) => {
                 <ProductListSuggestion data={recommendProducts?.content} />
             </div>
             <div className="productDetail__comments">
-
+                <ProductComments data={comments?.content} />
             </div>
             <div className="productDetail__watched">
-
+                <h1 className='watched__title'>PRODUCT WHICH YOU HAD WATCH</h1>
+                <ProductsWatched />
             </div>
         </>
     )

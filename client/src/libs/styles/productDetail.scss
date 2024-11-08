@@ -565,6 +565,97 @@
     }
 }
 
+.productComment__wrapper {
+    @apply py-12 px-16 grid grid-cols-12 gap-10;
+
+    .comment__sumRate {
+        @apply col-span-3;
+
+        .sumRate__wrapper {
+            @apply sticky top-32 p-8 flex flex-col justify-center gap-2 rounded-lg;
+            background-color: #ececec;
+
+            h2 {
+                @apply text-center text-xl font-semibold;
+            }
+
+            .sumRate__number {
+                @apply text-7xl text-center font-semibold;
+            }
+
+            .MuiRating-root.MuiRating-sizeMedium.Mui-readOnly.MuiRating-readOnly.css-15befwp-MuiRating-root {
+                @apply flex mx-auto text-4xl;
+            }
+
+            .sumRate__totalRate {
+                @apply text-sm italic text-center;
+                color: var(--secondGray);
+            }
+        }
+
+    }
+
+    .comment__side {
+        @apply col-span-9;
+
+        .commentFilter__wrapper {
+            @apply px-4;
+
+            .MuiFormControl-root.css-1869usk-MuiFormControl-root {
+                @apply m-0;
+            }
+
+            .MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-sizeSmall.css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+                @apply rounded-3xl w-[250px];
+
+                .MuiSelect-select.MuiSelect-outlined.MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputSizeSmall.css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+                    @apply py-3 px-4 text-sm font-semibold;
+
+                }
+            }
+        }
+
+        .comment__list {
+            @apply flex flex-wrap items-center gap-5;
+
+            .comment__item {
+                @apply w-1/2 p-4 border-b;
+
+                .MuiRating-root.MuiRating-sizeMedium.Mui-readOnly.MuiRating-readOnly.css-15befwp-MuiRating-root {
+                    @apply text-3xl;
+                    color: var(--primaryBlack);
+                }
+
+                .comment__user {
+                    @apply flex gap-3 items-center mb-4;
+
+                    h3 {
+                        @apply font-semibold text-sm;
+                    }
+                }
+
+                .comment__content {
+                    @apply text-justify text-sm mb-4;
+                }
+
+                .comment__date {
+                    @apply text-sm;
+                    color: var(--secondGray);
+                }
+            }
+        }
+    }
+}
+
+.productDetail__watched {
+    background-color: #f9f9f9;
+    @apply px-16 py-12;
+
+    .watched__title {
+        @apply text-center font-semibold text-2xl mb-8;
+    }
+}
+
 @keyframes orbit {
     0% {
         // transform: translate(0, 0) rotate(0deg) scale(1) translate(328px);
@@ -574,7 +665,7 @@
 
     100% {
         // transform: translate(-50%, -50%) rotate(180deg) scale(1) translate(328px);
-        transform: translateY(-50%) rotate(180deg) scale(.5) translate(1000px);
+        transform: translateY(-50%) rotate(180deg) scale(0) translate(1000px);
         opacity: 0;
     }
 }
@@ -582,7 +673,7 @@
 @keyframes orbit1Back {
     0% {
         // transform: translate(-50%, -50%) rotate(180deg) scale(1) translate(328px);
-        transform: translateY(-50%) rotate(180deg) scale(.5) translate(1000px);
+        transform: translateY(-50%) rotate(180deg) scale(0) translate(1000px);
         opacity: 0;
     }
 
@@ -596,7 +687,7 @@
 @keyframes orbit2 {
     0% {
         // transform: translate(0, 0) rotate(180deg) scale(1) translate(328px);
-        transform: translateY(-50%) rotate(180deg) scale(.5);
+        transform: translateY(-50%) rotate(180deg) scale(0);
         opacity: 0;
     }
 
@@ -616,7 +707,7 @@
 
     100% {
         // transform: translate(0, 0) rotate(180deg) scale(1) translate(328px);
-        transform: translateY(-50%) rotate(180deg) scale(.5);
+        transform: translateY(-50%) rotate(180deg) scale(0);
         opacity: 0;
     }
 }
