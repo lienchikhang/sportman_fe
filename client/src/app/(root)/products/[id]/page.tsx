@@ -7,6 +7,9 @@ import HeaderProductDetail from '@/components/HeaderProductDetail';
 import ProductListSuggestion from '@/components/ProductListSuggestion';
 import ProductComments from '@/components/ProductComments';
 import ProductsWatched from '@/components/ProductsWatched';
+import { ChoiceProvider } from '@/libs/contexts/choice.context';
+import { CartProvider } from '@/libs/contexts/cart.context';
+import CartNotification from '@/components/CartNotification';
 
 
 const ProductDetailPage = async ({ params, searchParams }: { params: { id: string }, searchParams: { [key: string]: string } }) => {
@@ -38,40 +41,24 @@ const ProductDetailPage = async ({ params, searchParams }: { params: { id: strin
         '--background-rotate': `url(${backImage})`
     };
 
-    console.log({ comments });
-
     if (!data || !recommendProducts || !comments) return notFound();
 
     return (
         <>
-            <HeaderProductDetail data={rest} frontImage={frontImage} />
+            <CartNotification />
             <div className='productDetail'>
                 <div className="productDetail__wrapper">
                     <div className="productDetail__images">
-                        <div className="images__wrapper">
-                            <div className="background-rotate">
-                                <div className="bg-rotate"></div>
-                            </div>
-                            <div className="list">
-                                <div className="item active">
-                                    <div className="images">
-                                        <div className="item__img">
-                                            <img className='image-bg' src={frontImage} alt="" />
-                                        </div>
-                                        <div className="item__img"
-                                            style={style}
-                                        >
-                                            <img className='image-bg' src={backImage} alt="" />
-                                        </div>
-                                    </div>
-                                    <ProductDetailImage frontImage={frontImage} backImage={backImage} />
-                                </div>
-                            </div>
-                        </div>
+                        <ProductDetailImage frontImage={frontImage} backImage={backImage} />
                     </div>
-                    <div className="productDetail__info">
-                        <ProductDetailInfo data={data?.content} />
-                    </div>
+                    <ChoiceProvider>
+                        <CartProvider>
+                            <HeaderProductDetail data={rest} frontImage={frontImage} />
+                            <div className="productDetail__info">
+                                <ProductDetailInfo data={data?.content} />
+                            </div>
+                        </CartProvider>
+                    </ChoiceProvider>
                 </div>
                 <div className="productDetail__detail">
                     <h2 className='detail__heading'>Product Detail</h2>

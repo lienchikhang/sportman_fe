@@ -6,12 +6,14 @@ import { motion } from 'framer-motion';
 import { useUser } from '@/libs/contexts/user.context';
 import http from '@/libs/configs/http';
 import { useRouter } from 'next/navigation';
+import { ICart } from '@/libs/interfaces/order.interface';
 
 const Cart = () => {
 
     const [totalItem, setTotalItem] = useState(0);
     const { user } = useUser();
     const router = useRouter();
+
 
     useEffect(() => {
 
@@ -26,7 +28,11 @@ const Cart = () => {
         http.get(`/carts`, true)
             .then((res) => {
                 console.log({ res });
-                setTotalItem(res?.data?.content?.totalElements);
+                const carts: ICart[] = res?.data?.content?.carts;
+                const total = carts.reduce((acc: number, cur: ICart): number => {
+                    return acc + cur.amount;
+                }, 0);
+                setTotalItem(total);
             })
             .catch((err) => {
                 setTotalItem(0);

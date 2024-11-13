@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import { useChoice } from '@/libs/contexts/choice.context';
+import { useCart } from '@/libs/contexts/cart.context';
+import { ICart } from '@/libs/interfaces/order.interface';
+import { Button } from './ui';
 
 
 interface Props {
@@ -10,6 +14,7 @@ interface Props {
         id: string,
         productName: string,
         productPrice: number,
+        frontImage: string,
         colors: any[],
         stocks: {
             sizeTag: string,
@@ -21,13 +26,15 @@ interface Props {
 
 const HeaderProductDetailSize: React.FC<Props> = ({ data }) => {
 
-    const { stocks } = data;
-
-    const [curChoice, setCurChoice] = useState('');
+    const { stocks, id, productName, productPrice, frontImage } = data;
     const [amount, setAmount] = useState(1);
+    const { curChoice, handleSetChoice } = useChoice();
+    const { handleAddCart } = useCart();
+
 
     const handleChoice = (choice: string) => {
-        setCurChoice(choice);
+        // setCurChoice(choice);
+        handleSetChoice(choice);
     }
 
     const handleChangeAmount = (number: number) => {
@@ -35,8 +42,8 @@ const HeaderProductDetailSize: React.FC<Props> = ({ data }) => {
         setAmount(prev => prev + number);
     }
 
-    const handleAddtoCart = () => {
-
+    const handleAddtoCart = (item: ICart) => {
+        handleAddCart(item);
     }
 
     return (
@@ -68,10 +75,28 @@ const HeaderProductDetailSize: React.FC<Props> = ({ data }) => {
                         <AddIcon />
                     </div>
                 </div>
-                <button>
-                    <ShoppingBasketIcon />
-                    <span>Add to cart</span>
-                </button>
+                <Button
+                    callback={() => handleAddtoCart({
+                        productId: id,
+                        amount: 1,
+                        productName,
+                        frontImage,
+                        productPrice: productPrice.toString(),
+                        sizeTag: curChoice.toUpperCase(),
+                    })}
+                    style='btn-add-to-cart'
+                    primary
+                    disable={curChoice ? false : true}
+                    onlyLoading
+                    timer={1800}
+                    hasIntrospect
+                    text={
+                        <>
+                            <ShoppingBasketIcon />
+                            <span>Add to cart</span>
+                        </>
+                    }
+                />
             </div>
         </>
     )

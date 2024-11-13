@@ -40,6 +40,22 @@ const http = {
 
     },
 
+    async delete(endpoint: string, isSecure: boolean = false): Promise<any> {
+        const cookie = await fetch("http://localhost:3000/api/get-token", {
+            method: "GET",
+        }).then((res) => res.json());
+
+        if (isSecure) {
+            return await axiosInstance.delete(endpoint, {
+                headers: {
+                    'Authorization': `Bearer ${cookie?.token || 'token'}`
+                }
+            });
+        }
+
+        return await axiosInstance.delete(endpoint);
+    },
+
     async introspect(endpoint: string): Promise<any> {
         const accessToken = Cookies.get('access');
 

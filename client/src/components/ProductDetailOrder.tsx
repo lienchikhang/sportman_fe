@@ -1,16 +1,19 @@
 'use client';
 import React, { useState } from 'react'
-import { Button } from './ui';
-import { Drawer } from '@mui/material';
-import http from '@/libs/configs/http';
 import { useRouter } from 'next/navigation';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import { useChoice } from '@/libs/contexts/choice.context';
+import notificationEmitter from '@/libs/configs/eventDriven';
+import { ICart } from '@/libs/interfaces/order.interface';
+import { useCart } from '@/libs/contexts/cart.context';
+import { Button } from './ui';
 
 interface Props {
     data: {
         id: string,
         productName: string,
         productPrice: number,
+        frontImage: string,
         colors: any[],
         stocks: {
             sizeTag: string,
@@ -22,34 +25,19 @@ interface Props {
 
 const ProductDetailOrder: React.FC<Props> = ({ data }) => {
 
-    const { id, stocks, productName, productPrice, colors, seasons } = data;
-    const [curChoice, setCurChoice] = useState('');
-    const [openDrawer, setOpenDrawer] = useState(false);
+    const { id, stocks, productName, productPrice, frontImage } = data;
     const [amount, setAmount] = useState(1);
-    const router = useRouter();
+    const { handleSetChoice, curChoice } = useChoice();
+    const { handleAddCart } = useCart();
 
     const handleChoice = (choice: string) => {
-        setCurChoice(choice);
+        handleSetChoice(choice);
     }
 
-    const toggleDrawer =
-        (open: boolean) =>
-            (event: React.KeyboardEvent | React.MouseEvent) => {
-
-                console.log('clicked')
-                if (
-                    event.type === 'keydown' &&
-                    ((event as React.KeyboardEvent).key === 'Tab' ||
-                        (event as React.KeyboardEvent).key === 'Shift')
-                ) {
-                    return;
-                }
-
-                setOpenDrawer(open);
-            };
-
-    const handleBuyNow = () => {
-
+    const handleBuyNow = (item: ICart) => {
+        if (!curChoice) return;
+        // notificationEmitter.emit('newCart', item);
+        handleAddCart(item);
     }
 
     const handleChangeAmount = (number: number) => {
@@ -59,38 +47,13 @@ const ProductDetailOrder: React.FC<Props> = ({ data }) => {
 
     return (
         <>
-            <Drawer
-                anchor={'right'}
-                open={openDrawer}
-                onClose={toggleDrawer(false)}
-            >
-                <li>
-                    <p>{productName}</p>
-                </li>
-                <li>
-                    <p>{productPrice}</p>
-                </li>
-                <li>
-                    <p>Cur choice:</p>
-                    <p>{curChoice}</p>
-                </li>
-                <li>
-                    <p>total</p>
-                    <p>{productPrice * amount}</p>
-                </li>
-                <li>
-                    <p onClick={() => handleChangeAmount(-1)}>-</p>
-                    <p>{amount}</p>
-                    <p onClick={() => handleChangeAmount(1)}>+</p>
-                </li>
-            </Drawer>
             <div className='productDetail__size'>
                 <p>Size:</p>
                 <div className='size__list'>
                     {
                         stocks.map((stock, idx) => {
                             return <div
-                                className={`stockItem ${curChoice === stock.sizeTag.toUpperCase() ? 'active' : ''}`}
+                                className={`stockItem ${curChoice === stock.sizeTag.toUpperCase() ? 'active' : ''} ${stock.stocks < 1 ? 'unactive' : ''}`}
                                 key={idx}
                                 onClick={() => handleChoice(stock.sizeTag.toUpperCase())}
                             >
@@ -100,10 +63,28 @@ const ProductDetailOrder: React.FC<Props> = ({ data }) => {
                     }
                 </div>
             </div>
-            <button className='btn-add-to-cart' onClick={toggleDrawer(true)}>
-                <ShoppingBasketIcon />
-                <span>Add to cart</span>
-            </button>
+            <Button
+                callback={() => handleBuyNow({
+                    productId: id,
+                    amount: 1,
+                    productName,
+                    frontImage,
+                    productPrice: productPrice.toString(),
+                    sizeTag: curChoice.toUpperCase(),
+                })}
+                style='btn-add-to-cart'
+                primary
+                disable={curChoice ? false : true}
+                onlyLoading
+                timer={1800}
+                hasIntrospect
+                text={
+                    <>
+                        <ShoppingBasketIcon />
+                        <span>Add to cart</span>
+                    </>
+                }
+            />
         </>
     )
 }

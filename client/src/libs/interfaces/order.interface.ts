@@ -5,5 +5,7 @@ export interface IOrder {
 }
 
 export interface ICart extends IOrder {
-
+    frontImage: string,
+    productName: string,
+    productPrice: string,
 }

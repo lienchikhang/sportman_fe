@@ -134,7 +134,6 @@ const LoginForm = () => {
                             onlyLoading
                             timer={2000}
                             callback={() => handleSubmit(onSubmit)}
-                            showNotice={() => { }}
                         />
                     </div>
                 </form>

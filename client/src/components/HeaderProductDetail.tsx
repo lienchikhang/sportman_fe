@@ -71,7 +71,7 @@ const HeaderProductDetail: React.FC<Props> = ({ data, frontImage }) => {
                 </div>
             </div>
             <div className='rest'>
-                <HeaderProductDetailSize data={data} />
+                <HeaderProductDetailSize data={{ ...data, frontImage }} />
             </div>
         </header>
     )

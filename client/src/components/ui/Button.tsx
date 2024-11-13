@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import "../../libs/styles/ui/button.scss";
 import { CircularProgress } from '@mui/material';
 import http from '@/libs/configs/http';
@@ -9,7 +9,7 @@ import notificationEmitter from '../../libs/configs/eventDriven';
 
 
 interface Props {
-    text: string,
+    text: string | ReactNode,
     style?: string,
     hasIntrospect?: boolean,
     primary: boolean,
@@ -48,7 +48,6 @@ const Button: React.FC<Props> = ({
                 .then((res) => {
                     setTimeout(() => {
                         callback();
-                        notificationEmitter.emit('success', 'Add to cart successfully!')
                         setLoading(false);
                     }, timer)
                 })
@@ -94,7 +93,7 @@ const Button: React.FC<Props> = ({
                 onClick={handleClick}
             >
                 {isLoading ? <div className={`flex items-center ${onlyLoading ? 'justify-center' : 'gap-1'}`}>
-                    {onlyLoading ? <CircularProgress style={{ width: '19px', height: '19px' }} /> : <span>Loading...</span>}
+                    {onlyLoading ? <CircularProgress style={{ width: '19px', height: '19px' }} /> : <span className='block text-center'>Loading...</span>}
                 </div> : text}
             </button>
         </>

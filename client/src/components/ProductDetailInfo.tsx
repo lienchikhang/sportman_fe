@@ -42,6 +42,9 @@ const ProductDetailInfo: React.FC<Props> = ({ data }) => {
                 const products: IProduct[] = JSON.parse(storage);
                 const idx = products.findIndex(pro => pro.id == id);
                 console.log({ idx });
+
+                // == -1 => k co => add
+                // != -1 => co => k add
                 if (idx != -1) return;
                 products.push({ ...data });
                 localStorage.setItem("products::storage", JSON.stringify(products));

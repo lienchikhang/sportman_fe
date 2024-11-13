@@ -1,0 +1,136 @@
+.cartPage__wrapper {
+    @apply px-16 py-4 grid grid-cols-10;
+
+    .cartPage__left {
+        @apply col-span-6 p-5;
+
+        h1.title {
+            @apply text-3xl py-3 font-semibold;
+        }
+
+        .cartPage__form {
+            @apply py-3;
+        }
+
+        .payment__methods {
+
+            @apply py-8;
+
+            .method__wrapper {
+                @apply w-full flex items-center gap-3 p-4 border rounded-xl cursor-pointer transition-all;
+
+                span {
+                    @apply block w-[25px] h-[25px] rounded-full transition-all border;
+                    border-color: var(--primaryBlue);
+                    box-shadow: inset 0 0 0 2px white;
+                }
+
+                &:hover {
+                    background-color: #f2f2f2;
+
+                    span {
+                        background-color: var(--primaryBlue);
+                    }
+                }
+
+                &.active {
+                    background-color: #f2f2f2;
+
+                    span {
+                        background-color: var(--primaryBlue);
+                    }
+                }
+            }
+        }
+    }
+
+    .cartPage__right {
+        @apply col-span-4;
+
+        .btnSelect {
+            @apply block w-[25px] h-[25px] rounded-md border cursor-pointer;
+            box-shadow: inset 0 0 0 2px white;
+
+            &.active {
+                background-color: var(--primaryBlue);
+                border-color: var(--primaryBlue);
+            }
+
+            &.unactive {
+                background-color: transparent;
+                border-color: #d9d9d9;
+            }
+        }
+
+        .cartSection {
+
+
+            .cart__condition {
+
+                @apply flex gap-3 flex-1;
+
+                p {
+                    @apply text-sm;
+                    color: #999999;
+                }
+
+                span {
+                    @apply text-sm;
+                    color: #999999;
+
+                    &.divide {
+                        @apply block w-[2px] h-[20px];
+                        background-color: #999999;
+                    }
+
+                    &.btnDeleteAll {
+                        @apply cursor-pointer;
+                    }
+                }
+            }
+
+            .cartList {
+                .cartItem {
+                    @apply flex py-6 items-center gap-2;
+
+                    .img__wrapper {
+                        @apply w-[120px] h-[180px] rounded-lg mr-2 flex items-center justify-center;
+                        background-color: var(--primaryGray);
+                    }
+
+                    img {
+                        @apply w-[120px] object-cover block;
+                    }
+
+                    .cartItem__info {
+                        h3 {
+                            @apply text-base font-medium mb-4 max-w-[220px] flex-wrap;
+                        }
+
+                        span.info__size {
+                            @apply inline-block px-6 py-2 mb-4 rounded-full;
+                            background-color: #f2f2f2;
+                        }
+
+                        .cartItem__delete {
+
+                            @apply flex items-center gap-1 cursor-pointer;
+
+                            svg {
+                                @apply text-xl;
+                            }
+
+                            span {
+                                @apply text-sm;
+                            }
+                        }
+                    }
+
+                    .cartItem__amount {
+                        @apply mx-auto flex items-center justify-center gap-3 w-[120px];
+                    }
+                }
+            }
+        }
+    }
+}
