@@ -16,6 +16,7 @@ export const OrderProvider: FC<ChoiceProviderProps> = ({ children }) => {
         phone: '',
         email: '',
         method: 'cod',
+        total: 0,
         orders: [] as IOrder[],
     });
 
@@ -45,6 +46,13 @@ export const OrderProvider: FC<ChoiceProviderProps> = ({ children }) => {
             ...prev,
             orders: newOrders,
         }));
+
+        setData(prev => ({
+            ...prev,
+            total: newOrders.reduce((acc, cur) => {
+                return acc + cur.amount * cur.productPrice;
+            }, 0)
+        }))
     }
 
     const handleSetEmail = (email: string) => {

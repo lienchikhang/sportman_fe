@@ -13,6 +13,7 @@ const http = {
         }).then((res) => res.json());
 
         if (isSecure) {
+            console.log({ cookiGet: cookie });
             return await axiosInstance.get(endpoint, {
                 headers: {
                     'Authorization': `Bearer ${cookie?.token || 'token'}`

@@ -10,15 +10,15 @@ import { fetchCart } from '@/app/actions/cart.action';
 import CartItem from './cart/CartItem';
 
 interface Props {
-    content: {
-        carts: ICart[],
-        currentPage: number,
-        totalPage: number,
-        totalElements: number
-    }
+    // content: {
+    //     carts: ICart[],
+    //     currentPage: number,
+    //     totalPage: number,
+    //     totalElements: number
+    // }
 }
 
-const CartSection: React.FC<Props> = ({ content }) => {
+const CartSection: React.FC<Props> = ({ }) => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -40,7 +40,10 @@ const CartSection: React.FC<Props> = ({ content }) => {
             setCarts(res?.content?.carts);
             handleSetOrders(res?.content?.carts);
             setTotalItem(res?.content?.carts?.length);
-        });
+        })
+            .catch((err) => {
+                console.log({ err });
+            });
     }, []);
 
     //checking state all selected
@@ -112,9 +115,36 @@ const CartSection: React.FC<Props> = ({ content }) => {
         //delete cart in orderContext
     }
 
-    const handleUpdateCartItem = () => {
+    const handleUpdateCartItem = (cartItem: ICart, isIncrease: boolean) => {
         //delete cart in dbms
-        //delete cart in orderContext
+        if (isIncrease) {
+            http.post(`/carts/add`, cartItem, true)
+                .then((res) => {
+                    console.log('res in increase', res);
+                    if (res?.data?.statusCode == 200) {
+                        //fetch data again
+                        fetchCart()
+                            .then((res) => {
+                                setCarts(res?.content?.carts)
+                                return res?.content?.carts;
+                            })
+                            .then((res) => handleSetOrders(res));
+                    }
+                });
+
+            return;
+        }
+
+        //delete
+        //case amount == 1
+        if (cartItem.amount == 1) {
+            handleDeleteCartItem(cartItem.productId, cartItem.sizeTag);
+            return;
+        }
+
+        //delete
+        //case amount != 1
+
     }
 
     if (error) return <Error />
@@ -122,34 +152,64 @@ const CartSection: React.FC<Props> = ({ content }) => {
     return (
         <div className='cartSection p-2'>
             <h1 className='text-3xl font-semibold mb-4'>Your cart</h1>
-            <div className='flex items-center mb-4'>
-                <span onClick={handleSelectAll} className={`btnSelect mr-3 ${hasSelectedAll ? 'active' : 'unactive'}`}></span>
-                <div className='cart__condition'>
-                    <p>ALL PRODUCTS</p>
-                    <span className='divide'></span>
-                    <span className='btnDeleteAll'>DELETE ALL</span>
+            {
+                carts.length ? <>
+                    <div className='flex items-center mb-4'>
+                        <span onClick={handleSelectAll} className={`btnSelect mr-3 ${hasSelectedAll ? 'active' : 'unactive'}`}></span>
+                        <div className='cart__condition'>
+                            <p>ALL PRODUCTS</p>
+                            <span className='divide'></span>
+                            <span className='btnDeleteAll'>DELETE ALL</span>
+                        </div>
+                        <div className='w-[100px]'>
+                            <p className='text-sm' style={{ color: '#999999' }}>AMOUNT</p>
+                        </div>
+                        <div className=''>
+                            <p className='text-sm' style={{ color: '#999999' }}>PRICE</p>
+                        </div>
+                    </div>
+                    <Divider />
+                    <div className='cartList'>
+                        {
+                            carts.map((cart, idx) => {
+                                return <CartItem allSelect={hasSelectedAll}
+                                    dataCart={cart}
+                                    key={idx}
+                                    handleUnselectCartItem={handleUnselectCartItem}
+                                    totalItem={totalItem}
+                                    handleSetSelectAll={handleSetSelectAll}
+                                    handleDeleteCartItem={handleDeleteCartItem}
+                                    handleUpdateCartItem={handleUpdateCartItem}
+                                />
+                            })
+                        }
+                    </div>
+                </> : <>
+                    <div className='py-4'>
+                        <p className='text-sm'>Your cart is empty.</p>
+                        <p className='text-sm'>Go shopping now!</p>
+                    </div>
+                </>
+            }
+            <Divider />
+            <div>
+                <div className='flex items-center justify-between py-4'>
+                    <p className='text-sm font-medium'>Temporary price</p>
+                    <p className='text-sm'>{data?.total?.toLocaleString()} VND</p>
                 </div>
-                <div className='w-[100px]'>
-                    <p className='text-sm' style={{ color: '#999999' }}>AMOUNT</p>
+                <div className='flex items-center justify-between py-4'>
+                    <p className='text-sm font-medium'>Discount</p>
+                    <p className='text-sm'>{0} VND</p>
                 </div>
-                <div className=''>
-                    <p className='text-sm' style={{ color: '#999999' }}>PRICE</p>
+                <div className='flex items-center justify-between py-4'>
+                    <p className='text-sm font-medium'>Shipping Fee</p>
+                    <p className='text-sm'>Free</p>
                 </div>
             </div>
             <Divider />
-            <div className='cartList'>
-                {
-                    carts.map((cart, idx) => {
-                        return <CartItem allSelect={hasSelectedAll}
-                            dataCart={cart}
-                            key={idx}
-                            handleUnselectCartItem={handleUnselectCartItem}
-                            totalItem={totalItem}
-                            handleSetSelectAll={handleSetSelectAll}
-                            handleDeleteCartItem={handleDeleteCartItem}
-                        />
-                    })
-                }
+            <div className='flex items-center justify-between py-4'>
+                <p className='text-sm font-medium'>Total Fee</p>
+                <p className='text-base font-semibold'>{data?.total?.toLocaleString()} VND</p>
             </div>
         </div>
     )

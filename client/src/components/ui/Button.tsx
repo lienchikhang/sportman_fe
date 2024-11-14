@@ -55,14 +55,14 @@ const Button: React.FC<Props> = ({
 
                     console.log('err in hasIntrospect', err);
 
-                    if (err?.response?.status == 400) {
+                    if (err?.status == 400) {
                         setTimeout(() => {
                             setLoading(false);
                             notificationEmitter.emit('error', 'Please Login!')
                         }, timer)
                     }
 
-                    if (err?.response?.status == 401 && err?.response?.data?.msg == 'LoginExpired') {
+                    if (err?.status == 401 && err?.data?.msg == 'LoginExpired') {
                         setTimeout(() => {
                             setLoading(false);
                             notificationEmitter.emit('error', 'Login Expired!')
@@ -100,4 +100,20 @@ const Button: React.FC<Props> = ({
     )
 }
 
-export default Button
+export default Button;
+
+/**
+ * Map<String, Object> data = new HashMap<>();
+            data.put("orders", orders);
+            data.put("phone", request.getPhone());
+            data.put("receiver", request.getReceiver());
+            data.put("address", request.getAddress());
+            data.put("address", request.getAddress());
+
+            //create jsonString
+            String jsonString = objectMapper.writeValueAsString(data);
+
+            //endcode
+            String encodeJson = URLEncoder.encode(jsonString, StandardCharsets.UTF_8.toString());
+            return encodeJson;
+ */

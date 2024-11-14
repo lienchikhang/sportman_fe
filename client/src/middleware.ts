@@ -23,6 +23,8 @@ export async function middleware(request: NextRequest) {
 
         } catch (error: any) {
             console.log('catch error in introspect', error?.response?.data);
+            if (request.nextUrl.pathname.includes('me')) return NextResponse.redirect(new URL('/', request.url));
+
         }
 
         return NextResponse.next();

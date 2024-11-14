@@ -12,6 +12,7 @@ interface Props {
     totalItem: number,
     handleSetSelectAll: (state: boolean) => void,
     handleDeleteCartItem: (productId: string, sizeTag: string) => void;
+    handleUpdateCartItem: (cartItem: ICart, isIncrease: boolean) => void;
 }
 
 const CartItem: React.FC<Props> = ({
@@ -20,7 +21,9 @@ const CartItem: React.FC<Props> = ({
     handleUnselectCartItem,
     totalItem,
     handleSetSelectAll,
-    handleDeleteCartItem }) => {
+    handleDeleteCartItem,
+    handleUpdateCartItem,
+}) => {
 
     const [select, setSelect] = useState(false);
     const { handleSetOrders, data } = useOrder();
@@ -72,12 +75,12 @@ const CartItem: React.FC<Props> = ({
                     <span>Delete</span>
                 </div>
             </div>
-            <div className='cartItem__amount'>
-                <span>-</span>
+            <div className='cartItem__amount px-6 py-2 rounded-full border' style={{ borderColor: '#d9d9d9' }}>
+                <span className='cursor-pointer' onClick={() => handleUpdateCartItem(dataCart, false)}>-</span>
                 <span>{dataCart?.amount}</span>
-                <span>+</span>
+                <span className='cursor-pointer' onClick={() => handleUpdateCartItem(dataCart, true)}>+</span>
             </div>
-            <p className='font-semibold'>{dataCart?.productPrice}</p>
+            <p className='font-semibold'>{dataCart?.productPrice?.toLocaleString()}</p>
         </div>
     )
 }

@@ -1,12 +1,24 @@
 'ues client';
+import notificationEmitter from '@/libs/configs/eventDriven';
 import { useOrder } from '@/libs/contexts/order.context';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const OrderPhone = () => {
 
     const [input, setInput] = useState('');
     const [error, setError] = useState(false);
     const { handleSetPhone } = useOrder();
+
+    useEffect(() => {
+        notificationEmitter.on('orderInfoMissingPhone', (msg) => {
+            console.log('err in email order', msg);
+            setError(true);
+        })
+
+        return () => {
+            notificationEmitter.off('orderInfoMissing', (msg) => { })
+        }
+    }, []);
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInput(e.currentTarget.value);

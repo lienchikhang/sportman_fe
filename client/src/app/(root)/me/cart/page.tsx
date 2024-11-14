@@ -9,17 +9,6 @@ import OrderConfirm from '@/components/order/OrderConfirm';
 
 const CartPage = async () => {
 
-    const local = cookies().get('access')?.value;
-
-    if (!local) return notFound();
-
-    const cart = await fetch(`http://localhost:8080/sportman/carts?pageSize=6`, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${local}`
-        }
-    }).then((res) => res.json());
-
     return (
         <div className='cartPage__wrapper'>
             <OrderProvider>
@@ -30,7 +19,7 @@ const CartPage = async () => {
                     </div>
                 </div>
                 <div className="cartPage__right">
-                    <CartSection content={cart?.content} />
+                    <CartSection />
                 </div>
                 <OrderConfirm />
             </OrderProvider>

@@ -23,7 +23,10 @@ const User = () => {
         </div>
     }
 
-    return <AvatarCustom variant='rounded' url={user.avatar || ''} name={user.username} />;
+    return <>
+        <AvatarCustom variant='rounded' url={user.avatar || ''} name={user.username} />
+        <button onClick={logout}>Log out</button>
+    </>;
 };
 
 export default User

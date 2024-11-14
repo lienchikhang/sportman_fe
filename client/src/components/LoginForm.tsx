@@ -8,6 +8,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
 import { useUser } from '@/libs/contexts/user.context';
+import notificationEmitter from '@/libs/configs/eventDriven';
 
 
 type Inputs = {
@@ -32,7 +33,6 @@ const LoginForm = () => {
 
         http.post(`/auth/login`, { ...formData })
             .then((res) => {
-                console.log({ login: res })
 
                 //call api server
                 fetch('/api/auth', {
@@ -57,11 +57,11 @@ const LoginForm = () => {
                     ...res?.data?.content?.userInfo
                 });
                 localStorage.setItem('user', JSON.stringify({ ...res?.data?.content?.userInfo }));
-                toast.success('Login success');
+                notificationEmitter.emit('success', 'Login success');
 
                 //redirect or reload (if we have a middleware)
                 setTimeout(() => {
-                    router.push("/home");
+                    router.push("/");
                 }, 1000);
             })
             .catch((err) => {

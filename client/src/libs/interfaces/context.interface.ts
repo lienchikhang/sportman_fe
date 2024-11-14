@@ -54,6 +54,7 @@ export interface IOrderContextType {
         email: string,
         method: string,
         orders: IOrder[],
+        total: number,
     },
     handleSetAddress: (address: string) => void,
     handleSetReceiver: (receiver: string) => void,

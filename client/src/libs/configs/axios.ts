@@ -52,9 +52,8 @@ axiosInstance.interceptors.response.use(function (response) {
 
             return axiosInstance(originalRequest);
         } catch (refreshError: any) {
-            console.log('error in out of process', refreshError?.response);
-            // Xử lý nếu refresh token thất bại (ví dụ: logout user)
-            return Promise.reject(refreshError);
+            // console.log('error in out of process', refreshError?.response);
+            return Promise.reject(refreshError?.response);
         }
     }
 
