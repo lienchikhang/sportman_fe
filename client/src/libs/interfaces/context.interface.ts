@@ -63,3 +63,8 @@ export interface IOrderContextType {
     handleSetEmail: (email: string) => void
     handleSetMethod: (method: string) => void
 }
+
+export interface IOrderItemDetailContextType {
+    orderId: string,
+    handleToggle: (value: string) => void;
+}

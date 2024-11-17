@@ -40,10 +40,11 @@ const ModalAuth = () => {
     }
 
     if (state === 'register') {
-        return <div className={`modalAuth ${isHidden ? 'mt-[144px]' : ''}`}>
+        return <div className={`modalAuth ${isHidden ? 'mt-[144px]' : ''} ${toggle ? 'active' : 'unactive'}`}>
             <div className="modal">
                 <ModalCloseButton />
-                <h2>SPORT <span>CLUB</span> </h2>
+                <h1 className='form__heading'>SPORT <span>CLUB</span> </h1>
+                <p className='form__title'>Choose your favorite football club with <strong>SportMan</strong></p>
                 <p>Rất nhiều đặc quyền và quyền lợi mua sắm đang chờ bạn</p>
                 <p className='form__register'>Not a member?
                     {state == 'register' && <span onClick={() => handleChangeState('login')}>Login</span>}
